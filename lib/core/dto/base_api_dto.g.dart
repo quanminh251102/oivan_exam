@@ -11,10 +11,10 @@ BaseApiDto<T> _$BaseApiDtoFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) =>
     BaseApiDto<T>(
-      data: _$nullableGenericFromJson(json['data'], fromJsonT),
-      message: json['message'] as String?,
-      success: json['success'] as bool,
-      total: (json['total'] as num?)?.toInt(),
+      items: _$nullableGenericFromJson(json['items'], fromJsonT),
+      has_more: json['has_more'] as bool?,
+      quota_max: (json['quota_max'] as num?)?.toInt(),
+      quota_remaining: (json['quota_remaining'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$BaseApiDtoToJson<T>(
@@ -22,10 +22,10 @@ Map<String, dynamic> _$BaseApiDtoToJson<T>(
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
-      'data': _$nullableGenericToJson(instance.data, toJsonT),
-      'message': instance.message,
-      'success': instance.success,
-      'total': instance.total,
+      'items': _$nullableGenericToJson(instance.items, toJsonT),
+      'has_more': instance.has_more,
+      'quota_max': instance.quota_max,
+      'quota_remaining': instance.quota_remaining,
     };
 
 T? _$nullableGenericFromJson<T>(

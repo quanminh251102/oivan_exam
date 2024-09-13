@@ -25,11 +25,13 @@ class _RestClient implements RestClient {
   Future<BaseApiDto<List<UserDto>>> getUsers({
     int? page,
     int? pageSize,
+    String? site,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
+      r'site': site,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -41,7 +43,7 @@ class _RestClient implements RestClient {
     )
         .compose(
           _dio.options,
-          '/api/chat_room',
+          '/users',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -59,6 +61,60 @@ class _RestClient implements RestClient {
             ? json
                 .map<UserDto>(
                     (i) => UserDto.fromJson(i as Map<String, dynamic>))
+                .toList()
+            : List.empty(),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<BaseApiDto<List<ReputationHistoryDto>>> getUserReputation({
+    int? userId,
+    int? page,
+    int? accessToken,
+    int? pageSize,
+    String? site,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'access_token': accessToken,
+      r'pageSize': pageSize,
+      r'site': site,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options =
+        _setStreamType<BaseApiDto<List<ReputationHistoryDto>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/users/${userId}/reputation-history/full',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late BaseApiDto<List<ReputationHistoryDto>> _value;
+    try {
+      _value = BaseApiDto<List<ReputationHistoryDto>>.fromJson(
+        _result.data!,
+        (json) => json is List<dynamic>
+            ? json
+                .map<ReputationHistoryDto>((i) =>
+                    ReputationHistoryDto.fromJson(i as Map<String, dynamic>))
                 .toList()
             : List.empty(),
       );

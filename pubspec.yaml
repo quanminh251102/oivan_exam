@@ -50,6 +50,8 @@ dependencies:
   url_launcher: ^6.3.0
   oauth2: ^2.0.3
   app_links: ^6.3.2
+  cached_network_image: ^3.4.1
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:

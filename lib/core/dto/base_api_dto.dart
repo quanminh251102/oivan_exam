@@ -5,18 +5,18 @@ part 'base_api_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true, genericArgumentFactories: true)
 class BaseApiDto<T> {
-  T? data;
-  @JsonKey(name: 'message')
-  final String? message;
-  @JsonKey(name: 'success')
-  final bool success;
-  @JsonKey(name: 'total')
-  int? total;
+  T? items;
+  @JsonKey(name: 'has_more')
+  bool? has_more;
+  @JsonKey(name: 'quota_max')
+  int? quota_max;
+  @JsonKey(name: 'quota_remaining')
+  int? quota_remaining;
   BaseApiDto({
-    this.data,
-    this.message,
-    required this.success,
-    this.total,
+    this.items,
+    this.has_more,
+    this.quota_max,
+    this.quota_remaining,
   });
 
   factory BaseApiDto.fromJson(

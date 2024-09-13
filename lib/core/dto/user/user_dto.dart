@@ -5,6 +5,81 @@ part 'user_dto.g.dart';
 @JsonSerializable(explicitToJson: true)
 class UserDto {
   BadgeCountDto? badgeCounts;
+  int? account_id;
+  bool? is_employee;
+  int? last_modified_date;
+  int? last_access_date;
+  int? reputation_change_year;
+  int? reputation_change_quarter;
+  int? reputation_change_month;
+  int? reputation_change_week;
+  int? reputation_change_day;
+  int? reputation;
+  int? creation_date;
+  String? user_type;
+  int? user_id;
+  int? accept_rate;
+  String? location;
+  String? website_url;
+  String? link;
+  String? profile_image;
+  String? display_name;
+
+  UserDto({
+    this.badgeCounts,
+    this.account_id,
+    this.is_employee,
+    this.last_modified_date,
+    this.last_access_date,
+    this.reputation_change_year,
+    this.reputation_change_quarter,
+    this.reputation_change_month,
+    this.reputation_change_week,
+    this.reputation_change_day,
+    this.reputation,
+    this.creation_date,
+    this.user_type,
+    this.user_id,
+    this.accept_rate,
+    this.location,
+    this.website_url,
+    this.link,
+    this.profile_image,
+    this.display_name,
+  });
+
+  UIUserDto clone() {
+    return UIUserDto(
+      badgeCounts: badgeCounts,
+      accountId: account_id,
+      isEmployee: is_employee,
+      lastModifiedDate: last_modified_date,
+      lastAccessDate: last_access_date,
+      reputationChangeYear: reputation_change_year,
+      reputationChangeQuarter: reputation_change_quarter,
+      reputationChangeMonth: reputation_change_month,
+      reputationChangeWeek: reputation_change_week,
+      reputationChangeDay: reputation_change_day,
+      reputation: reputation,
+      creationDate: creation_date,
+      userType: user_type,
+      userId: user_id,
+      acceptRate: accept_rate,
+      location: location,
+      websiteUrl: website_url,
+      link: link,
+      profileImage: profile_image,
+      displayName: display_name,
+    );
+  }
+
+  factory UserDto.fromJson(Map<String, dynamic> json) =>
+      _$UserDtoFromJson(json);
+  Map<String, dynamic> toJson() => _$UserDtoToJson(this);
+}
+
+class UIUserDto {
+  BadgeCountDto? badgeCounts;
   int? accountId;
   bool? isEmployee;
   int? lastModifiedDate;
@@ -25,7 +100,7 @@ class UserDto {
   String? profileImage;
   String? displayName;
 
-  UserDto(
+  UIUserDto(
       {this.badgeCounts,
       this.accountId,
       this.isEmployee,
@@ -46,8 +121,4 @@ class UserDto {
       this.link,
       this.profileImage,
       this.displayName});
-
-  factory UserDto.fromJson(Map<String, dynamic> json) =>
-      _$UserDtoFromJson(json);
-  Map<String, dynamic> toJson() => _$UserDtoToJson(this);
 }
