@@ -1,7 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:app_links/app_links.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:oivan_exam/constant.dart';
+import 'package:oivan_exam/global/router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -12,24 +18,6 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-  String? accessToken;
-  final AppLinks _appLinks = AppLinks();
-  Future<void> initDeepLinks() async {
-    try {
-      final appLink = await _appLinks.getInitialLink();
-      if (appLink != null) {
-        _handleRedirect(appLink);
-      }
-
-      _appLinks.uriLinkStream.listen((uri) {
-        _handleRedirect(uri);
-      });
-    } on Exception catch (e) {
-      print('AppLinksException: $e');
-      // Xử lý lỗi, ví dụ: hiển thị thông báo cho người dùng
-    }
-  }
-
   Future<void> _initiateAuth() async {
     final authUrl = Uri.parse(authorizationEndpoint).replace(queryParameters: {
       'client_id': clientId,
@@ -37,54 +25,34 @@ class _SignInScreenState extends State<SignInScreen> {
       'redirect_uri': redirectUri,
     });
 
-    if (await canLaunchUrl(authUrl)) {
-      await launchUrl(
-        authUrl,
-        mode: LaunchMode.inAppBrowserView,
-      ).then(
-        (value) {},
-      );
-    } else {
-      throw 'Could not launch $authUrl';
-    }
-  }
-
-  Future<void> _handleRedirect(Uri uri) async {
-    if (uri.queryParameters.containsKey('code')) {
-      final code = uri.queryParameters['code']!;
-
-      final response = await http.post(
-        Uri.parse(accessTokenEndpoint),
-        body: {
-          'client_id': clientId,
-          'client_secret': clientSecret,
-          'code': code,
-          'redirect_uri': redirectUri,
-        },
-      );
-
-      if (response.statusCode == 200) {
-        // Parse the response to get the access token
-        final accessToken = Uri.splitQueryString(response.body)['access_token'];
-        setState(() {
-          this.accessToken = accessToken;
-        });
-      } else {
-        // Handle error
-        print('Error getting access token: ${response.body}');
-      }
-    }
-  }
-
-  @override
-  void initState() {
-    Future.delayed(
-      Duration.zero,
-      () async {
-        await initDeepLinks();
-      },
+// Present the dialog to the user
+    final result = await FlutterWebAuth.authenticate(
+      url: authUrl.toString(),
+      callbackUrlScheme: 'callback-scheme',
     );
-    super.initState();
+
+// Extract code from resulting url
+    final code = Uri.parse(result).queryParameters['code'];
+
+// Use this code to get an access token
+    final response = await http.post(Uri.parse(accessTokenEndpoint), body: {
+      'client_id': clientId,
+      'redirect_uri': 'redirectUri',
+      'client_secret': clientSecret,
+      'code': code,
+    });
+
+// Get the access token from the response
+    final accessToken = jsonDecode(response.body)['access_token'] as String;
+    print(accessToken);
+    // if (await canLaunchUrl(authUrl)) {
+    //   await launchUrl(
+    //     authUrl,
+    //     mode: LaunchMode.inAppBrowserView,
+    //   );
+    // } else {
+    //   throw 'Could not launch $authUrl';
+    // }
   }
 
   @override
@@ -169,8 +137,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: _initiateAuth,
                         child: Text('Authenticate'),
                       ),
-                      if (accessToken != null)
-                        Text('Access Token: $accessToken'),
                     ],
                   ),
                 ),

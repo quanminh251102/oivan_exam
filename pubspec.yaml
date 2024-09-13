@@ -52,6 +52,9 @@ dependencies:
   app_links: ^6.3.2
   cached_network_image: ^3.4.1
   collection: ^1.18.0
+  webview_flutter: ^4.8.0
+  flutter_inappwebview: ^5.8.0
+  flutter_web_auth: ^0.5.0
 
 dev_dependencies:
   flutter_test:
