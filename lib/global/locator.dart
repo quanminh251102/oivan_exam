@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 
 import 'package:get_it/get_it.dart';
 
 import 'package:oivan_exam/constant.dart';
+import 'package:oivan_exam/core/utils/token_utils.dart';
+import 'package:oivan_exam/global/router.dart';
 
 import '../core/api/rest_client.dart';
 
@@ -20,47 +23,6 @@ Future<void> setupLocator() async {
   setupRestClient();
   registerDaoSingletons(locator);
   registerServiceSingletons(locator);
-  await checkLogin();
-}
-
-Future<void> checkLogin() async {
-  // String? token = await TokenUtils.getToken();
-  // if (token != null) {
-  //   if (locator<GlobalData>().currentUser != null) {
-  //     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-  //     if (Platform.isAndroid) {
-  //       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-  //       await getRestClient().createLoggedDevice(
-  //         token: token,
-  //         model: LoggedDeviceDto(
-  //           name: '${androidInfo.brand.toUpperCase()} ${androidInfo.model}',
-  //           userId: locator<GlobalData>().currentUser!.id,
-  //           deviceToken: token.split(" ")[1],
-  //           isLogOut: false,
-  //           deviceId: androidInfo.id,
-  //           type: 2,
-  //           lastLogin: DateTime.now(),
-  //         ),
-  //       );
-  //       locator<GlobalData>().currentDeviceId = androidInfo.id;
-  //     } else {
-  //       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-  //       await getRestClient().createLoggedDevice(
-  //         token: token,
-  //         model: LoggedDeviceDto(
-  //           name: '${iosInfo.name.toUpperCase()} ${iosInfo.model}',
-  //           userId: locator<GlobalData>().currentUser!.id,
-  //           deviceToken: token.split(" ")[1],
-  //           isLogOut: false,
-  //           deviceId: iosInfo.identifierForVendor,
-  //           type: 1,
-  //           lastLogin: DateTime.now(),
-  //         ),
-  //       );
-  //       locator<GlobalData>().currentDeviceId = iosInfo.identifierForVendor;
-  //     }
-  //   }
-  // }
 }
 
 void setupRestClient() {

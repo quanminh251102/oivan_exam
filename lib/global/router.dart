@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oivan_exam/ui/screens/home/home_screen.dart';
-import 'package:oivan_exam/ui/screens/sign_in/auth_screen.dart';
 import 'package:oivan_exam/ui/screens/sign_in/sign_in_screen.dart';
+import 'package:oivan_exam/ui/screens/splash/splash_screen.dart';
 
 class MyRouter {
   static const String other = '/';
@@ -38,10 +38,10 @@ class MyRouter {
           settings,
           const HomeScreen(),
         );
-      case auth:
+      case splash:
         return _buildRouteNavigationWithoutEffect(
           settings,
-          AuthScreen(),
+          const SplashScreen(),
         );
       default:
         return _buildRouteNavigationWithoutEffect(

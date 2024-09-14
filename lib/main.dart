@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           title: 'OivanStack',
           navigatorKey: NavigationUtils.navigatorKey,
           onGenerateRoute: (settings) => MyRouter.generateRoute(settings),
-          initialRoute: MyRouter.login,
+          initialRoute: MyRouter.splash,
           theme: ThemeData(
             checkboxTheme: CheckboxThemeData(
               side: WidgetStateBorderSide.resolveWith(

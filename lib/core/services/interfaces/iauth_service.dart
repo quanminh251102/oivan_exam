@@ -1,3 +1,4 @@
 abstract class IAuthService {
-  // Future<bool> login(String emailOrPhone, String password);
+  Future<bool> checkLogin();
+  Future<bool> initiateAuth();
 }

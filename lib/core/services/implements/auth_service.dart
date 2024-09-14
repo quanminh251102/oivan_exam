@@ -1,24 +1,56 @@
+import 'dart:convert';
+
+import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:oivan_exam/constant.dart';
 import 'package:oivan_exam/core/services/interfaces/iauth_service.dart';
+import 'package:oivan_exam/core/utils/token_utils.dart';
+import 'package:oivan_exam/global/global_data.dart';
+import 'package:oivan_exam/global/locator.dart';
+import 'package:http/http.dart' as http;
+import '../../../ui/utils/loading_dialog_utils.dart';
 
 class AuthService implements IAuthService {
-  // @override
-  // Future<bool> login(String emailOrPhone, String password) async {
-  //   LoadingDialogUtils.showLoading();
-  //   try {
-  //     var result = await getRestClient().getToken(LoginDto(
-  //         userNameOrEmailAddress: emailOrPhone,
-  //         password: password,
-  //         deviceTypeId: 3));
+  @override
+  Future<bool> checkLogin() async {
+    var token = await TokenUtils.getToken();
+    if (token != null) {
+      return true;
+    }
+    return false;
+  }
 
-  //     if (result.success) {
-  //       TokenUtils.saveToken("Bearer ${result.result!.accessToken}");
-  //     }
-  //     return result.success;
-  //   } on Exception catch (e) {
-  //     print(e);
-  //   } finally {
-  //     LoadingDialogUtils.hideLoading();
-  //   }
-  //   return false;
-  // }
+  String? getAccessToken(String url) {
+    Uri uri = Uri.parse(url);
+    String fragment = uri.fragment;
+    List<String> params = fragment.split('&');
+    String accessToken = params
+        .firstWhere((param) => param.startsWith('access_token='))
+        .split('=')[1];
+    if (accessToken.isNotEmpty) {
+      return accessToken;
+    }
+    return null;
+  }
+
+  @override
+  Future<bool> initiateAuth() async {
+    final authUrl = Uri.parse(authorizationEndpoint).replace(queryParameters: {
+      'client_id': clientId,
+      'scope': 'no_expiry',
+      'redirect_uri': redirectUri,
+    });
+
+    final result = await FlutterWebAuth.authenticate(
+      url: authUrl.toString(),
+      callbackUrlScheme: 'callback-scheme',
+    );
+
+    if (getAccessToken(result) != null) {
+      final String accessToken = getAccessToken(result)!;
+      locator<GlobalData>().token = accessToken;
+      await TokenUtils.saveToken(accessToken);
+      return true;
+    }
+    return false;
+  }
 }
