@@ -6,8 +6,11 @@ import 'package:oivan_exam/ui/utils/loading_dialog_utils.dart';
 
 class UserService implements IUserService {
   int _totalUser = 0;
+  bool _hasMore = false;
   @override
   int get totalUser => _totalUser;
+  @override
+  bool get hasMore => _hasMore;
 
   int _totalReputationHistory = 0;
   @override
@@ -22,13 +25,15 @@ class UserService implements IUserService {
     LoadingDialogUtils.showLoading();
     try {
       var result = await getRestClient().getUsers(
-        page: pageSize,
+        page: page,
         pageSize: pageSize,
         site: site,
       );
       LoadingDialogUtils.hideLoading();
       if (result.items != null) {
         if (result.items!.isNotEmpty) {
+          _totalUser = result.items!.length;
+          _hasMore = result.has_more ?? false;
           return result.items;
         }
       }

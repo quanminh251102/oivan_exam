@@ -3,6 +3,7 @@ import 'package:oivan_exam/core/dto/user/user_dto.dart';
 
 abstract class IUserService {
   int get totalUser;
+  bool get hasMore;
   int get totalReputationHistory;
 
   Future<List<UserDto>?> getUsers({

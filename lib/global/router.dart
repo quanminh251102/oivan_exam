@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oivan_exam/ui/screens/home/detail_page.dart';
 import 'package:oivan_exam/ui/screens/home/home_screen.dart';
 import 'package:oivan_exam/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:oivan_exam/ui/screens/splash/splash_screen.dart';
@@ -9,6 +10,7 @@ class MyRouter {
   static const String home = '/home';
   static const String login = '/login';
   static const String auth = '/auth';
+  static const String detail = '/detail';
   static PageRouteBuilder _buildRouteNavigationWithoutEffect(
       RouteSettings settings, Widget widget) {
     return PageRouteBuilder(
@@ -37,6 +39,13 @@ class MyRouter {
         return _buildRouteNavigationWithoutEffect(
           settings,
           const HomeScreen(),
+        );
+      case detail:
+        return _buildRouteNavigationWithoutEffect(
+          settings,
+          UserDetailPage(
+            userName: settings.arguments as String,
+          ),
         );
       case splash:
         return _buildRouteNavigationWithoutEffect(

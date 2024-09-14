@@ -11,14 +11,20 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
 
   List<UserDto> _users = [];
   int _totalUser = 0;
+  bool _hasMoreData = false;
+  bool _isGetMore = false;
 
   List<ReputationHistoryDto> _reputations = [];
   int _totalReputations = 0;
 
-  int page = 1;
+  int page = 2;
 
   @override
   List<UserDto> get users => _users;
+  @override
+  bool get hasMoreData => _hasMoreData;
+  @override
+  bool get isGetMore => _isGetMore;
 
   void _reset() {
     page = 1;
@@ -40,6 +46,29 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
     );
     _users = userList ?? [];
     _totalUser = _iUserService.totalUser;
+    _hasMoreData = _iUserService.hasMore;
+    notifyListeners();
+  }
+
+  @override
+  Future<void> getMoreUsers() async {
+    if (_totalUser == 0) {
+      return;
+    }
+    _isGetMore = true;
+    notifyListeners();
+    page += 1;
+    final userList = await _iUserService.getUsers(
+      page: page,
+      pageSize: page * 10,
+      site: 'stackoverflow',
+    );
+
+    _users.addAll(
+      userList ?? [],
+    );
+    _totalUser = _iUserService.totalUser;
+    _isGetMore = false;
     notifyListeners();
   }
 

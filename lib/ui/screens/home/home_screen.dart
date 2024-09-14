@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:oivan_exam/core/dto/user/user_dto.dart';
 import 'package:oivan_exam/core/view_models/interfaces/ihome_viewmodel.dart';
-import 'package:oivan_exam/ui/screens/home/widget/user_card.dart';
+import 'package:oivan_exam/ui/screens/home/main_page.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,39 +11,73 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late IHomeViewModel _iHomeViewModel;
+  int _selectedIndex = 0;
+  final PageController _pageController = PageController();
 
-  @override
-  void initState() {
-    _iHomeViewModel = context.read<IHomeViewModel>();
-    Future.delayed(
-      Duration.zero,
-      () async {
-        _iHomeViewModel.initGetUsers();
-      },
-    );
-    super.initState();
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    _pageController.jumpToPage(index);
   }
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Consumer<IHomeViewModel>(
-        builder: (context, vm, child) {
-          return SingleChildScrollView(
-            child: Center(
-              child: Column(
-                  children: vm.users.map(
-                (user) {
-                  UIUserDto userDto = user.clone();
-                  return UserCard(userDto: userDto);
-                },
-              ).toList()),
-            ),
-          );
+      appBar: AppBar(
+        title: Text('Bottom Navigation with PageView'),
+      ),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
         },
+        children: [
+          KeepAlivePage(child: const MainPage()),
+          KeepAlivePage(child: Center(child: Text('Search Page'))),
+          KeepAlivePage(child: Center(child: Text('Profile Page'))),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
+  }
+}
+
+class KeepAlivePage extends StatefulWidget {
+  final Widget child;
+  KeepAlivePage({required this.child});
+
+  @override
+  _KeepAlivePageState createState() => _KeepAlivePageState();
+}
+
+class _KeepAlivePageState extends State<KeepAlivePage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context); // Ensure AutomaticKeepAliveClientMixin works
+    return widget.child;
   }
 }
