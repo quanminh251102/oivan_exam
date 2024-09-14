@@ -18,7 +18,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   late IHomeViewModel _iHomeViewModel;
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     _iHomeViewModel = context.read<IHomeViewModel>();
@@ -63,15 +63,12 @@ class _MainPageState extends State<MainPage> {
                     UIUserDto userDto = vm.users[index].clone();
                     return _UserCard(userDto: userDto);
                   }
+                  return null;
                 },
                 childCount:
                     vm.hasMoreData ? vm.users.length + 1 : vm.users.length,
               ),
             ),
-            if (vm.isGetMore)
-              const SliverFillRemaining(
-                child: CircularProgressIndicator(),
-              )
           ],
         );
       },

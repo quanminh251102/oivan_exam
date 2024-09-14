@@ -14,6 +14,7 @@ class AuthService implements IAuthService {
   Future<bool> checkLogin() async {
     var token = await TokenUtils.getToken();
     if (token != null) {
+      locator<GlobalData>().token = token;
       return true;
     }
     return false;

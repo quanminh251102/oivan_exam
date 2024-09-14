@@ -40,13 +40,14 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
   Future<void> initGetUsers() async {
     _reset();
     final userList = await _iUserService.getUsers(
+      true,
       page: 1,
       pageSize: 10,
       site: 'stackoverflow',
     );
     _users = userList ?? [];
     _totalUser = _iUserService.totalUser;
-    _hasMoreData = _iUserService.hasMore;
+    _hasMoreData = _iUserService.hasMoreUser;
     notifyListeners();
   }
 
@@ -59,6 +60,7 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
     notifyListeners();
     page += 1;
     final userList = await _iUserService.getUsers(
+      false,
       page: page,
       pageSize: page * 10,
       site: 'stackoverflow',

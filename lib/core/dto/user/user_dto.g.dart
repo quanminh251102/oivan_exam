@@ -7,9 +7,10 @@ part of 'user_dto.dart';
 // **************************************************************************
 
 UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
-      badgeCounts: json['badgeCounts'] == null
+      badge_counts: json['badge_counts'] == null
           ? null
-          : BadgeCountDto.fromJson(json['badgeCounts'] as Map<String, dynamic>),
+          : BadgeCountDto.fromJson(
+              json['badge_counts'] as Map<String, dynamic>),
       account_id: (json['account_id'] as num?)?.toInt(),
       is_employee: json['is_employee'] as bool?,
       last_modified_date: (json['last_modified_date'] as num?)?.toInt(),
@@ -34,7 +35,7 @@ UserDto _$UserDtoFromJson(Map<String, dynamic> json) => UserDto(
     );
 
 Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
-      'badgeCounts': instance.badgeCounts?.toJson(),
+      'badge_counts': instance.badge_counts?.toJson(),
       'account_id': instance.account_id,
       'is_employee': instance.is_employee,
       'last_modified_date': instance.last_modified_date,

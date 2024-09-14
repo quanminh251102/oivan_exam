@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oivan_exam/ui/screens/home/detail_page.dart';
+import 'package:oivan_exam/core/dto/user/user_dto.dart';
+import 'package:oivan_exam/ui/screens/profile/detail_page.dart';
 import 'package:oivan_exam/ui/screens/home/home_screen.dart';
 import 'package:oivan_exam/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:oivan_exam/ui/screens/splash/splash_screen.dart';
@@ -44,7 +45,7 @@ class MyRouter {
         return _buildRouteNavigationWithoutEffect(
           settings,
           UserDetailPage(
-            userName: settings.arguments as String,
+            userDto: settings.arguments as UIUserDto,
           ),
         );
       case splash:

@@ -4,7 +4,7 @@ part 'user_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class UserDto {
-  BadgeCountDto? badgeCounts;
+  BadgeCountDto? badge_counts;
   int? account_id;
   bool? is_employee;
   int? last_modified_date;
@@ -26,7 +26,7 @@ class UserDto {
   String? display_name;
 
   UserDto({
-    this.badgeCounts,
+    this.badge_counts,
     this.account_id,
     this.is_employee,
     this.last_modified_date,
@@ -50,7 +50,7 @@ class UserDto {
 
   UIUserDto clone() {
     return UIUserDto(
-      badgeCounts: badgeCounts,
+      badgeCounts: badge_counts,
       accountId: account_id,
       isEmployee: is_employee,
       lastModifiedDate: last_modified_date,

@@ -31,3 +31,13 @@ class ReputationGroupByPost {
     this.postId,
   });
 }
+
+class ReputationGroupByTime {
+  DateTime? time;
+  List<ReputationHistoryDto>? reputationList;
+
+  ReputationGroupByTime({
+    this.time,
+    this.reputationList,
+  });
+}

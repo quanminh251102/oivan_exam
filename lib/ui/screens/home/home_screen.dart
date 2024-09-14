@@ -25,7 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bottom Navigation with PageView'),
+        automaticallyImplyLeading: false,
+        title: Text(
+          'OivanStack',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: PageView(
         controller: _pageController,
