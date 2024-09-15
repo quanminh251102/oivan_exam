@@ -25,12 +25,16 @@ class _RestClient implements RestClient {
   Future<BaseApiDto<List<UserDto>>> getUsers({
     int? page,
     int? pageSize,
+    String? accessToken,
+    String? key,
     String? site,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
+      r'access_token': accessToken,
+      r'key': key,
       r'site': site,
     };
     queryParameters.removeWhere((k, v) => v == null);
@@ -76,6 +80,7 @@ class _RestClient implements RestClient {
     int? userId,
     int? page,
     String? accessToken,
+    String? key,
     int? pageSize,
     String? site,
   }) async {
@@ -83,6 +88,7 @@ class _RestClient implements RestClient {
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'access_token': accessToken,
+      r'key': key,
       r'pageSize': pageSize,
       r'site': site,
     };
@@ -130,12 +136,16 @@ class _RestClient implements RestClient {
     int? userId,
     int? page,
     int? pageSize,
+    String? accessToken,
+    String? key,
     String? site,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
+      r'access_token': accessToken,
+      r'key': key,
       r'site': site,
     };
     queryParameters.removeWhere((k, v) => v == null);

@@ -1,3 +1,4 @@
+import 'package:oivan_exam/constant.dart';
 import 'package:oivan_exam/core/dto/user/reputation_history_dto.dart';
 import 'package:oivan_exam/core/dto/user/tag_dto.dart';
 import 'package:oivan_exam/core/dto/user/user_dto.dart';
@@ -34,6 +35,8 @@ class UserService implements IUserService {
       var result = await getRestClient().getUsers(
         page: page,
         pageSize: pageSize,
+        accessToken: locator<GlobalData>().token,
+        key: key,
         site: site,
       );
       if (isShowLoading) LoadingDialogUtils.hideLoading();
@@ -51,7 +54,8 @@ class UserService implements IUserService {
   }
 
   @override
-  Future<List<ReputationHistoryDto>?> getUserReputation({
+  Future<List<ReputationHistoryDto>?> getUserReputation(
+    bool isShowLoading, {
     int? userId,
     int? page,
     int? pageSize,
@@ -63,6 +67,8 @@ class UserService implements IUserService {
         userId: userId,
         page: pageSize,
         pageSize: pageSize,
+        accessToken: locator<GlobalData>().token,
+        key: key,
         site: site,
       );
       LoadingDialogUtils.hideLoading();
@@ -91,6 +97,8 @@ class UserService implements IUserService {
         userId: userId,
         page: pageSize,
         pageSize: pageSize,
+        accessToken: locator<GlobalData>().token,
+        key: key,
         site: site,
       );
       LoadingDialogUtils.hideLoading();

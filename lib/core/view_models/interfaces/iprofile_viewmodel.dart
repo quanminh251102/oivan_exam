@@ -6,5 +6,6 @@ abstract class IProfileViewModel implements ChangeNotifier {
   List<ReputationGroupByTime> get reputationGroupByTime;
   List<TagDto> get tags;
   Future<void> getUserReputation(int userId);
+  Future<void> getMoreReputation(int userId);
   Future<void> getUserTopTags(int userId);
 }

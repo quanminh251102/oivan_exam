@@ -15,8 +15,8 @@ class ProfileViewModel with ChangeNotifier implements IProfileViewModel {
   List<ReputationGroupByTime> get reputationGroupByTime =>
       _reputationGroupByTime;
 
-  final int _totalReputations = 0;
-  final int _totalReputationGroupByPost = 0;
+  int _totalReputations = 0;
+  int _totalReputationGroupByTime = 0;
   int page = 1;
 
   List<TagDto> _tags = [];
@@ -32,15 +32,39 @@ class ProfileViewModel with ChangeNotifier implements IProfileViewModel {
   Future<void> getUserReputation(int userId) async {
     _resetReputation();
     final reputationList = await _iUserService.getUserReputation(
+      true,
       userId: userId,
       page: 1,
       pageSize: 20,
       site: 'stackoverflow',
     );
     _reputations = reputationList ?? [];
+    _totalReputations = _reputations.length;
     if (_reputations.isNotEmpty) {
       _reputationGroupByTime = groupReputationByTime(reputationList!);
+      _totalReputationGroupByTime = _reputationGroupByTime.length;
     }
+    notifyListeners();
+  }
+
+  @override
+  Future<void> getMoreReputation(int userId) async {
+    if (_totalReputationGroupByTime == 0) {
+      return;
+    }
+    page += 1;
+    final reputationList = await _iUserService.getUserReputation(
+      true,
+      userId: userId,
+      page: page,
+      pageSize: page * 20,
+      site: 'stackoverflow',
+    );
+
+    _reputationGroupByTime.addAll(
+      groupReputationByTime(reputationList ?? []),
+    );
+
     notifyListeners();
   }
 

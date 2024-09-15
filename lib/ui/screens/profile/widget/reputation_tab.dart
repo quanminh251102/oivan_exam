@@ -15,14 +15,14 @@ class __ReputationTabState extends State<_ReputationTab> {
   @override
   void initState() {
     _iProfileViewModel = context.read<IProfileViewModel>();
-    // Future.delayed(
-    //   Duration.zero,
-    //   () async {
-    //     await _iProfileViewModel.getUserReputation(
-    //       widget.userDto.userId!,
-    //     );
-    //   },
-    // );
+    Future.delayed(
+      Duration.zero,
+      () async {
+        await _iProfileViewModel.getUserReputation(
+          widget.userDto.userId!,
+        );
+      },
+    );
     super.initState();
   }
 
@@ -34,6 +34,7 @@ class __ReputationTabState extends State<_ReputationTab> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,21 +79,29 @@ class __ReputationTabState extends State<_ReputationTab> {
                         },
                       ),
                       if (vm.reputationGroupByTime.isNotEmpty)
-                        TextButton(
-                          onPressed: () {},
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.blue, // Text color
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                            textStyle: const TextStyle(fontSize: 16),
-                            side: const BorderSide(
-                                color: Colors.blue), // Border color and width
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(25), // Rounded corners
+                        SizedBox(
+                          width: size.width * 0.4,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              await _iProfileViewModel.getMoreReputation(
+                                widget.userDto.userId!,
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              minimumSize: const Size.fromHeight(40),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  side: const BorderSide(
+                                      color: Color(0xff065FC4))),
+                            ),
+                            child: const Text(
+                              'See more',
+                              style: TextStyle(
+                                color: Color(0xff065FC4),
+                              ),
                             ),
                           ),
-                          child: const Text('See More'),
                         ),
                     ],
                   ),

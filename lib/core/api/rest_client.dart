@@ -15,6 +15,8 @@ abstract class RestClient {
   Future<BaseApiDto<List<UserDto>>> getUsers({
     @Query('page') int? page,
     @Query('pageSize') int? pageSize,
+    @Query('access_token') String? accessToken,
+    @Query('key') String? key,
     @Query('site') String? site,
   });
 
@@ -23,6 +25,7 @@ abstract class RestClient {
     @Path("ids") int? userId,
     @Query('page') int? page,
     @Query('access_token') String? accessToken,
+    @Query('key') String? key,
     @Query('pageSize') int? pageSize,
     @Query('site') String? site,
   });
@@ -32,6 +35,8 @@ abstract class RestClient {
     @Path("id") int? userId,
     @Query('page') int? page,
     @Query('pageSize') int? pageSize,
+    @Query('access_token') String? accessToken,
+    @Query('key') String? key,
     @Query('site') String? site,
   });
   // /// login

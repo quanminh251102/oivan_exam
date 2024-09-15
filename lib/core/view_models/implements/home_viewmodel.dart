@@ -73,18 +73,4 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
     _isGetMore = false;
     notifyListeners();
   }
-
-  @override
-  Future<void> getUserReputation(int userId) async {
-    _resetReputation();
-    final reputationList = await _iUserService.getUserReputation(
-      userId: userId,
-      page: 1,
-      pageSize: 30,
-      site: 'stackoverflow',
-    );
-    _reputations = reputationList ?? [];
-    _totalReputations = _iUserService.totalReputationHistory;
-    notifyListeners();
-  }
 }

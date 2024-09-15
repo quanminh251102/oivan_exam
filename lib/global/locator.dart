@@ -44,7 +44,7 @@ void setupRestClient() {
             // var errorDetails =
             //     ErrorDetailsDto.fromJson(error.response?.data["error"]);
             // EasyLoading.showError(errorDetails.message);
-            //EasyLoading.showError("Lỗi hệ thống");
+            EasyLoading.showError("Lỗi hệ thống");
             // print(errorDetails.message);
             // } else {
             // Get.snackbar("Lỗi máy chủ!", "", duration: Duration(microseconds: 700));

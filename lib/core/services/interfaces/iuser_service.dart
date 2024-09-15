@@ -14,7 +14,8 @@ abstract class IUserService {
     String? site,
   });
 
-  Future<List<ReputationHistoryDto>?> getUserReputation({
+  Future<List<ReputationHistoryDto>?> getUserReputation(
+    bool isShowLoading, {
     int? userId,
     int? page,
     int? pageSize,
