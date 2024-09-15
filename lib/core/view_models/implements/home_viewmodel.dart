@@ -9,6 +9,9 @@ import '../../dto/user/user_dto.dart';
 
 class HomeViewModel with ChangeNotifier implements IHomeViewModel {
   final IUserService _iUserService = locator<IUserService>();
+  bool _showOnlyBookmarked = false;
+  @override
+  bool get showOnlyBookmarked => _showOnlyBookmarked;
 
   final DatabaseHelper dbHelper = DatabaseHelper();
   List<int> _bookmarkedUserIds = [];
@@ -16,18 +19,15 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
   List<int> get bookmarkedUserIds => _bookmarkedUserIds;
 
   List<UserDto> _users = [];
-  List<UserDto> _usersUI = [];
+  List<UserDto> _filteredUsers = [];
   int _totalUser = 0;
   bool _hasMoreData = false;
   bool _isGetMore = false;
 
-  List<ReputationHistoryDto> _reputations = [];
-  int _totalReputations = 0;
-
   int page = 2;
 
   @override
-  List<UserDto> get users => _users;
+  List<UserDto> get users => _showOnlyBookmarked ? _filteredUsers : _users;
   @override
   bool get hasMoreData => _hasMoreData;
   @override
@@ -35,8 +35,38 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
 
   void _reset() {
     page = 1;
+    _showOnlyBookmarked = false;
     _bookmarkedUserIds.clear();
     _users.clear();
+    _filteredUsers.clear();
+  }
+
+  @override
+  void toggleFilter(bool value) {
+    _showOnlyBookmarked = value;
+    _applyFilter();
+    notifyListeners();
+  }
+
+  void _applyFilter() {
+    if (_showOnlyBookmarked) {
+      _filteredUsers =
+          _users.where((user) => user.isBookmarked ?? false).toList();
+    } else {
+      _filteredUsers = _users;
+    }
+    notifyListeners();
+  }
+
+  @override
+  void updateUser(int id, bool value) {
+    int index = _users.indexWhere((user) => user.user_id == id);
+    if (value) {
+      _users.elementAt(index).isBookmarked = true;
+    } else {
+      _users.elementAt(index).isBookmarked = false;
+    }
+    notifyListeners();
   }
 
   @override

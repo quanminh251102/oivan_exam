@@ -97,52 +97,6 @@ class _SummaryTabState extends State<_SummaryTab> {
 
           const SizedBox(height: 24),
 
-          // Mentor Section
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                const CircleAvatar(
-                  radius: 20,
-                  backgroundImage: NetworkImage(
-                      'https://via.placeholder.com/150'), // Replace with mentor's image
-                ),
-                const SizedBox(width: 12),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Clarissa C. (My mentor)',
-                        style: TextStyle(fontSize: 16)),
-                    Text('Chief design officer',
-                        style: TextStyle(fontSize: 14, color: Colors.grey)),
-                  ],
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.chat),
-                  onPressed: () {}, // Placeholder for chat action
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 24),
-
-          // Navigation Tabs (Goals, Courses, Tests)
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //     children: [
-          //       _buildNavItem('Goals', Icons.flag),
-          //       _buildNavItem('Courses', Icons.school),
-          //       _buildNavItem('Tests', Icons.edit),
-          //     ],
-          //   ),
-          // ),
-
-          const SizedBox(height: 24),
-
           // Active Goals Section
           // Padding(
           //   padding: const EdgeInsets.symmetric(horizontal: 16.0),

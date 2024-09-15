@@ -25,13 +25,13 @@ class IconText extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: iconSize,
-          color: iconColor ?? Theme.of(context).iconTheme.color,
+          size: 15,
+          color: Colors.grey,
         ),
         SizedBox(width: spacing),
         Text(
           text,
-          style: textStyle ?? Theme.of(context).textTheme.bodyMedium,
+          style: const TextStyle(color: Colors.grey),
         ),
       ],
     );

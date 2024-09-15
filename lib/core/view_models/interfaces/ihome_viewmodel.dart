@@ -6,6 +6,9 @@ abstract class IHomeViewModel implements ChangeNotifier {
   bool get hasMoreData;
   bool get isGetMore;
   List<int> get bookmarkedUserIds;
+  bool get showOnlyBookmarked;
+  void toggleFilter(bool value);
+  void updateUser(int index, bool value);
   Future<void> initGetUsers();
   Future<void> getMoreUsers();
 }
