@@ -19,7 +19,7 @@ class _BadgesWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          width: 10,
+          width: 5,
         ),
         Expanded(
           child: _BadgeCard(
@@ -28,7 +28,7 @@ class _BadgesWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          width: 10,
+          width: 5,
         ),
         Expanded(
           child: _BadgeCard(
@@ -53,67 +53,67 @@ class _BadgeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: title == 'gold'
-            ? Colors.amber.withOpacity(0.3)
-            : title == 'silver'
-                ? Colors.grey.withOpacity(0.3)
-                : Colors.brown.withOpacity(
-                    0.3,
+    return Card(
+      elevation: 2,
+      color: title == 'gold'
+          ? Colors.amber.shade100
+          : title == 'silver'
+              ? Colors.grey.shade100
+              : Colors.brown.shade100,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            10,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 15,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/$title-badge.png',
+                    height: 45,
+                    width: 45,
                   ),
-        borderRadius: BorderRadius.circular(
-          10,
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 0,
-          vertical: 15,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/images/$title-badge.png',
-                  height: 45,
-                  width: 45,
-                ),
-                const SizedBox(width: 8),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '$count',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: title == 'gold'
-                            ? Colors.amber.withOpacity(1)
-                            : title == 'silver'
-                                ? Colors.grey.withOpacity(1)
-                                : Colors.brown.withOpacity(
-                                    1,
-                                  ),
+                  const SizedBox(width: 8),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '$count',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: title == 'gold'
+                              ? Colors.amber.withOpacity(1)
+                              : title == 'silver'
+                                  ? Colors.grey.withOpacity(1)
+                                  : Colors.brown.withOpacity(
+                                      1,
+                                    ),
+                        ),
                       ),
-                    ),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.black,
-                        fontWeight: FontWeight.normal,
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

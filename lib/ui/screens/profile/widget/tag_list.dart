@@ -10,6 +10,8 @@ class _TagsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 2,
+      color: Colors.white,
       child: ListView.separated(
         shrinkWrap: true,
         padding: const EdgeInsets.all(16),
@@ -54,12 +56,12 @@ Widget _buildTagLabel(String tag) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
     decoration: BoxDecoration(
-      color: Colors.grey.shade200,
+      color: Colors.green.shade200,
       borderRadius: BorderRadius.circular(5),
     ),
     child: Text(
       tag,
-      style: const TextStyle(fontSize: 16, color: Colors.black87),
+      style: const TextStyle(fontSize: 16, color: Colors.white),
     ),
   );
 }

@@ -32,6 +32,32 @@ class __ReputationTabState extends State<_ReputationTab> {
         0, (total, item) => total + (item.reputation_change ?? 0));
   }
 
+  List<FlSpot> _createLineChartSpots(List<ReputationHistoryDto> data) {
+    List<FlSpot> spots = [];
+    for (int i = 0; i < data.length; i++) {
+      spots.add(FlSpot(
+        i.toDouble(),
+        (data[i].reputation_change ?? 0).toDouble(),
+      ));
+    }
+    return spots;
+  }
+
+  Widget _bottomTitleWidgets(double value, TitleMeta meta) {
+    final time = DateTime.fromMillisecondsSinceEpoch(
+        (value * 24 * 60 * 60 * 1000).toInt());
+    final formattedTime = '${time.day}/${time.month}';
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      child: Text(formattedTime),
+    );
+  }
+
+  String _formatDate(int epochTime) {
+    var date = DateTime.fromMillisecondsSinceEpoch(epochTime * 1000);
+    return DateFormat('MMM d').format(date);
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -39,6 +65,26 @@ class __ReputationTabState extends State<_ReputationTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Padding(
+            padding: EdgeInsets.only(
+              top: 8,
+              left: 16,
+              right: 16,
+            ),
+            child: Text('Reputation Chart',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                )),
+          ),
+          Consumer<IProfileViewModel>(
+            builder: (context, vm, child) {
+              return _ReputationChart(
+                totalReputation: widget.userDto.reputation ?? 0,
+                reputationHistoryList: vm.reputations,
+              );
+            },
+          ),
           //Reputation History
           const Padding(
             padding: EdgeInsets.only(
@@ -57,7 +103,7 @@ class __ReputationTabState extends State<_ReputationTab> {
             builder: (context, vm, child) {
               return SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -103,6 +149,9 @@ class __ReputationTabState extends State<_ReputationTab> {
                             ),
                           ),
                         ),
+                      SizedBox(
+                        height: size.height * 0.05,
+                      )
                     ],
                   ),
                 ),

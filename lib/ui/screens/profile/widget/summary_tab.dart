@@ -16,14 +16,14 @@ class _SummaryTabState extends State<_SummaryTab> {
   @override
   void initState() {
     _iProfileViewModel = context.read<IProfileViewModel>();
-    // Future.delayed(
-    //   Duration.zero,
-    //   () async {
-    //     await _iProfileViewModel.getUserTopTags(
-    //       widget.userDto.userId!,
-    //     );
-    //   },
-    // );
+    Future.delayed(
+      Duration.zero,
+      () async {
+        await _iProfileViewModel.getUserTopTags(
+          widget.userDto.userId!,
+        );
+      },
+    );
     super.initState();
   }
 
@@ -34,54 +34,64 @@ class _SummaryTabState extends State<_SummaryTab> {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                //Badges
-                const Text('Badges',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    )),
-                const SizedBox(height: 5),
-                if (widget.userDto.badgeCounts != null)
-                  _BadgesWidget(
-                    badges: widget.userDto.badgeCounts!,
-                  ),
-                const SizedBox(height: 8),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(
+                    10,
+                  )),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 8),
+                    //Badges
+                    const Text('Badges',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    const SizedBox(height: 5),
+                    if (widget.userDto.badgeCounts != null)
+                      _BadgesWidget(
+                        badges: widget.userDto.badgeCounts!,
+                      ),
+                    const SizedBox(height: 8),
 
-                //Stats
-                const Text('Stats',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    )),
-                const SizedBox(height: 5),
-                _StatsCard(
-                  year: '${widget.userDto.reputationChangeYear}',
-                  month: '${widget.userDto.reputationChangeMonth}',
-                  week: '${widget.userDto.reputationChangeWeek}',
-                  day: '${widget.userDto.reputationChangeDay}',
-                  total: '${widget.userDto.reputation}',
-                ),
+                    //Stats
+                    const Text('Stats',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    const SizedBox(height: 5),
+                    _StatsCard(
+                      year: '${widget.userDto.reputationChangeYear}',
+                      month: '${widget.userDto.reputationChangeMonth}',
+                      week: '${widget.userDto.reputationChangeWeek}',
+                      day: '${widget.userDto.reputationChangeDay}',
+                      total: '${widget.userDto.reputation}',
+                    ),
 
-                //Tags
-                const SizedBox(height: 8),
-                const Text('Top tags',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    )),
-                const SizedBox(height: 5),
-                Consumer<IProfileViewModel>(
-                  builder: (context, vm, child) {
-                    return vm.tags.isNotEmpty
-                        ? _TagsList(tags: vm.tags)
-                        : const SizedBox.shrink();
-                  },
+                    //Tags
+                    const SizedBox(height: 8),
+                    const Text('Top tags',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    const SizedBox(height: 5),
+                    Consumer<IProfileViewModel>(
+                      builder: (context, vm, child) {
+                        return vm.tags.isNotEmpty
+                            ? _TagsList(tags: vm.tags)
+                            : const SizedBox.shrink();
+                      },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
 

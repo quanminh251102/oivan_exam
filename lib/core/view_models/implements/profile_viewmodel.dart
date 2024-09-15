@@ -9,6 +9,8 @@ class ProfileViewModel with ChangeNotifier implements IProfileViewModel {
   final IUserService _iUserService = locator<IUserService>();
 
   List<ReputationHistoryDto> _reputations = [];
+  @override
+  List<ReputationHistoryDto> get reputations => _reputations;
 
   List<ReputationGroupByTime> _reputationGroupByTime = [];
   @override

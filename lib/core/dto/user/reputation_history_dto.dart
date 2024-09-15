@@ -23,16 +23,6 @@ class ReputationHistoryDto {
   Map<String, dynamic> toJson() => _$ReputationHistoryDtoToJson(this);
 }
 
-class ReputationGroupByPost {
-  int? postId;
-  List<ReputationHistoryDto>? reputationList;
-
-  ReputationGroupByPost({
-    this.reputationList,
-    this.postId,
-  });
-}
-
 class ReputationGroupByTime {
   DateTime? time;
   List<ReputationHistoryDto>? reputationList;

@@ -11,58 +11,80 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-              right: size.width * 0.05,
-            ),
-            child: CachedNetworkImage(
-              imageUrl:
-                  userDto.profileImage ?? 'https://via.placeholder.com/300x150',
-              placeholder: (context, url) => const CircleAvatar(
-                backgroundColor: Colors.amber,
-                radius: 35,
-              ),
-              imageBuilder: (context, image) => CircleAvatar(
-                backgroundImage: image,
-                radius: 35,
-              ),
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(
+              10,
+            )),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
             children: [
-              Text(
-                userDto.displayName ?? '',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              if (userDto.creationDate != null)
-                IconText(
-                  icon: Icons.cake_outlined,
-                  text: DateTimeUtils.memberDuration(
-                    userDto.creationDate!,
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.blue,
+                    width: 2,
                   ),
                 ),
-              if (userDto.lastModifiedDate != null)
-                IconText(
-                  icon: Icons.lock_clock_outlined,
-                  text: 'Last seen from ${DateTimeUtils.timeAgo(
-                    userDto.lastModifiedDate!,
-                  )}',
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: CachedNetworkImage(
+                    imageUrl: userDto.profileImage ??
+                        'https://via.placeholder.com/300x150',
+                    placeholder: (context, url) => const CircleAvatar(
+                      backgroundColor: Colors.amber,
+                      radius: 40,
+                    ),
+                    imageBuilder: (context, image) => CircleAvatar(
+                      backgroundImage: image,
+                      radius: 40,
+                    ),
+                  ),
                 ),
-              if (userDto.location != null)
-                IconText(
-                  icon: Icons.place_outlined,
-                  text: userDto.location!,
-                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    userDto.displayName ?? '',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  if (userDto.creationDate != null)
+                    IconText(
+                      icon: Icons.cake_outlined,
+                      text: DateTimeUtils.memberDuration(
+                        userDto.creationDate!,
+                      ),
+                    ),
+                  if (userDto.lastModifiedDate != null)
+                    IconText(
+                      icon: Icons.lock_clock_outlined,
+                      text: 'Last seen from ${DateTimeUtils.timeAgo(
+                        userDto.lastModifiedDate!,
+                      )}',
+                    ),
+                  if (userDto.location != null)
+                    IconText(
+                      icon: Icons.place_outlined,
+                      text: userDto.location!,
+                    ),
+                ],
+              ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

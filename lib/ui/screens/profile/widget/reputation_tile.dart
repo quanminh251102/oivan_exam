@@ -5,6 +5,7 @@ class _ReputationTile extends StatelessWidget {
   final ReputationGroupByTime group;
   final int totalReputation;
   final String totalReputationDisplay;
+
   const _ReputationTile({
     required this.group,
     required this.totalReputation,
@@ -36,20 +37,18 @@ class _ReputationTile extends StatelessWidget {
             Text(
               DateTimeUtils.formatDateWithSuffix(group.time!),
               style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
               ),
             ),
             Container(
               width: 60,
-              padding: const EdgeInsets.symmetric(vertical: 4),
+              padding: const EdgeInsets.symmetric(vertical: 6),
               decoration: BoxDecoration(
                 color: totalReputation >= 0
-                    ? Colors.green.withOpacity(
-                        0.1,
-                      )
+                    ? Colors.green.withOpacity(0.1)
                     : Colors.red.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
                 child: Text(
@@ -68,64 +67,77 @@ class _ReputationTile extends StatelessWidget {
             ? group.reputationList!.map((reputation) {
                 return Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: reputation.reputation_change! > 0
-                            ? Colors.green.withOpacity(
-                                0.1,
-                              )
-                            : Colors.red.withOpacity(0.1),
+                    Card(
+                      color: reputation.reputation_change! > 0
+                          ? Color.fromARGB(255, 237, 255, 238)
+                          : Color.fromARGB(255, 250, 235, 236),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 4, horizontal: 8),
+                      elevation: 2,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      height: 50,
                       child: ListTile(
                         leading: SizedBox(
-                          width: 120,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 25,
-                                child: Center(
-                                  child: Text(
-                                    "${reputation.reputation_change! > 0 ? '+' : ''}${reputation.reputation_change}",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: reputation.reputation_change! > 0
-                                          ? Colors.green
-                                          : Colors.red,
-                                    ),
-                                  ),
-                                ),
+                          width: 40,
+                          child: Center(
+                            child: Text(
+                              "${reputation.reputation_change! > 0 ? '+' : ''}${reputation.reputation_change}",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: reputation.reputation_change! > 0
+                                    ? Colors.green
+                                    : Colors.red,
+                                fontWeight: FontWeight.bold,
                               ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              SizedBox(
-                                width: 80,
-                                child: Text(
-                                  extractReputationType(
-                                      reputation.reputation_history_type),
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
-                        title: Text(
-                          "ID: ${reputation.post_id}",
-                          style: const TextStyle(
-                            fontSize: 13,
-                          ),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  reputation.reputation_change! > 0
+                                      ? Icons.arrow_upward
+                                      : Icons.arrow_downward,
+                                  color: reputation.reputation_change! > 0
+                                      ? Colors.green
+                                      : Colors.red,
+                                  size: 16,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  extractReputationType(
+                                      reputation.reputation_history_type),
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              "ID: ${reputation.post_id}",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
                         ),
                         trailing: Text(
                           DateTimeUtils.timeAgo(reputation.creation_date!),
                           style: const TextStyle(
-                              fontSize: 12, fontStyle: FontStyle.italic),
+                            fontSize: 12,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ),
-                    const Divider(
-                      height: 2,
-                    )
                   ],
                 );
               }).toList()

@@ -17,39 +17,42 @@ class _StatsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: const Color(0xffd2e8f6),
-          borderRadius: BorderRadius.circular(
-            10,
-          )),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    _buildStatColumn(year, "Year"),
-                    _buildStatColumn(month, "Month"),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    _buildStatColumn(week, "Week"),
-                    _buildStatColumn(day, "Day"),
-                  ],
-                ),
-              ],
-            ),
-            _buildStatColumn(total, "Total"),
-          ],
+    return Card(
+      color: const Color.fromARGB(255, 234, 246, 253),
+      elevation: 2,
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+          10,
+        )),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      _buildStatColumn(year, "Year"),
+                      _buildStatColumn(month, "Month"),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      _buildStatColumn(week, "Week"),
+                      _buildStatColumn(day, "Day"),
+                    ],
+                  ),
+                ],
+              ),
+              _buildStatColumn(total, "Total"),
+            ],
+          ),
         ),
       ),
     );
@@ -57,7 +60,7 @@ class _StatsCard extends StatelessWidget {
 
   Widget _buildStatColumn(String value, String label) {
     return SizedBox(
-      width: 110,
+      width: 100,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
