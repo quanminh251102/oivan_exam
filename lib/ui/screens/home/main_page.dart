@@ -1,12 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:oivan_exam/core/database/db_helper.dart';
 import 'package:oivan_exam/core/dto/user/user_dto.dart';
 import 'package:oivan_exam/core/utils/date_time_extension.dart';
 import 'package:oivan_exam/core/view_models/interfaces/ihome_viewmodel.dart';
 import 'package:oivan_exam/global/router.dart';
 import 'package:oivan_exam/ui/common_widgets/icon_text.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part './widget/user_card.dart';
 
@@ -28,12 +31,12 @@ class _MainPageState extends State<MainPage> {
         await _onScroll();
       },
     );
-    // Future.delayed(
-    //   Duration.zero,
-    //   () async {
-    //     await _iHomeViewModel.initGetUsers();
-    //   },
-    // );
+    Future.delayed(
+      Duration.zero,
+      () async {
+        await _iHomeViewModel.initGetUsers();
+      },
+    );
     super.initState();
   }
 
@@ -62,7 +65,11 @@ class _MainPageState extends State<MainPage> {
                 (BuildContext context, int index) {
                   if (index < vm.users.length) {
                     UIUserDto userDto = vm.users[index].clone();
-                    return _UserCard(userDto: userDto);
+                    return _UserCard(
+                      isBookmarked: userDto.isBookmarked ?? false,
+                      onBookmarkToggle: () {},
+                      userDto: userDto,
+                    );
                   }
                   return null;
                 },

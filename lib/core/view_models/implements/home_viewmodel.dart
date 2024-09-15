@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oivan_exam/core/database/db_helper.dart';
 import 'package:oivan_exam/core/dto/user/reputation_history_dto.dart';
 import 'package:oivan_exam/core/services/interfaces/iuser_service.dart';
 import 'package:oivan_exam/core/view_models/interfaces/ihome_viewmodel.dart';
@@ -9,7 +10,13 @@ import '../../dto/user/user_dto.dart';
 class HomeViewModel with ChangeNotifier implements IHomeViewModel {
   final IUserService _iUserService = locator<IUserService>();
 
+  final DatabaseHelper dbHelper = DatabaseHelper();
+  List<int> _bookmarkedUserIds = [];
+  @override
+  List<int> get bookmarkedUserIds => _bookmarkedUserIds;
+
   List<UserDto> _users = [];
+  List<UserDto> _usersUI = [];
   int _totalUser = 0;
   bool _hasMoreData = false;
   bool _isGetMore = false;
@@ -28,12 +35,8 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
 
   void _reset() {
     page = 1;
+    _bookmarkedUserIds.clear();
     _users.clear();
-  }
-
-  void _resetReputation() {
-    page = 1;
-    _reputations.clear();
   }
 
   @override
@@ -46,6 +49,10 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
       site: 'stackoverflow',
     );
     _users = userList ?? [];
+    _bookmarkedUserIds = await dbHelper.getBookmarkedUsers();
+    for (var user in users) {
+      user.isBookmarked = _bookmarkedUserIds.contains(user.user_id);
+    }
     _totalUser = _iUserService.totalUser;
     _hasMoreData = _iUserService.hasMoreUser;
     notifyListeners();
@@ -65,10 +72,12 @@ class HomeViewModel with ChangeNotifier implements IHomeViewModel {
       pageSize: page * 10,
       site: 'stackoverflow',
     );
-
-    _users.addAll(
-      userList ?? [],
-    );
+    if (userList!.isNotEmpty) {
+      for (var element in userList) {
+        element.isBookmarked = _bookmarkedUserIds.contains(element.user_id);
+        _users.add(element);
+      }
+    }
     _totalUser = _iUserService.totalUser;
     _isGetMore = false;
     notifyListeners();

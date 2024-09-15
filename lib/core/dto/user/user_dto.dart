@@ -24,29 +24,29 @@ class UserDto {
   String? link;
   String? profile_image;
   String? display_name;
-
-  UserDto({
-    this.badge_counts,
-    this.account_id,
-    this.is_employee,
-    this.last_modified_date,
-    this.last_access_date,
-    this.reputation_change_year,
-    this.reputation_change_quarter,
-    this.reputation_change_month,
-    this.reputation_change_week,
-    this.reputation_change_day,
-    this.reputation,
-    this.creation_date,
-    this.user_type,
-    this.user_id,
-    this.accept_rate,
-    this.location,
-    this.website_url,
-    this.link,
-    this.profile_image,
-    this.display_name,
-  });
+  bool? isBookmarked;
+  UserDto(
+      {this.badge_counts,
+      this.account_id,
+      this.is_employee,
+      this.last_modified_date,
+      this.last_access_date,
+      this.reputation_change_year,
+      this.reputation_change_quarter,
+      this.reputation_change_month,
+      this.reputation_change_week,
+      this.reputation_change_day,
+      this.reputation,
+      this.creation_date,
+      this.user_type,
+      this.user_id,
+      this.accept_rate,
+      this.location,
+      this.website_url,
+      this.link,
+      this.profile_image,
+      this.display_name,
+      this.isBookmarked});
 
   UIUserDto clone() {
     return UIUserDto(
@@ -70,6 +70,7 @@ class UserDto {
       link: link,
       profileImage: profile_image,
       displayName: display_name,
+      isBookmarked: isBookmarked,
     );
   }
 
@@ -99,26 +100,28 @@ class UIUserDto {
   String? link;
   String? profileImage;
   String? displayName;
-
-  UIUserDto(
-      {this.badgeCounts,
-      this.accountId,
-      this.isEmployee,
-      this.lastModifiedDate,
-      this.lastAccessDate,
-      this.reputationChangeYear,
-      this.reputationChangeQuarter,
-      this.reputationChangeMonth,
-      this.reputationChangeWeek,
-      this.reputationChangeDay,
-      this.reputation,
-      this.creationDate,
-      this.userType,
-      this.userId,
-      this.acceptRate,
-      this.location,
-      this.websiteUrl,
-      this.link,
-      this.profileImage,
-      this.displayName});
+  bool? isBookmarked;
+  UIUserDto({
+    this.badgeCounts,
+    this.accountId,
+    this.isEmployee,
+    this.lastModifiedDate,
+    this.lastAccessDate,
+    this.reputationChangeYear,
+    this.reputationChangeQuarter,
+    this.reputationChangeMonth,
+    this.reputationChangeWeek,
+    this.reputationChangeDay,
+    this.reputation,
+    this.creationDate,
+    this.userType,
+    this.userId,
+    this.acceptRate,
+    this.location,
+    this.websiteUrl,
+    this.link,
+    this.profileImage,
+    this.displayName,
+    this.isBookmarked,
+  });
 }
