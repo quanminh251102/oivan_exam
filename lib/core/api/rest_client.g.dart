@@ -75,7 +75,7 @@ class _RestClient implements RestClient {
   Future<BaseApiDto<List<ReputationHistoryDto>>> getUserReputation({
     int? userId,
     int? page,
-    int? accessToken,
+    String? accessToken,
     int? pageSize,
     String? site,
   }) async {
@@ -97,7 +97,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/users/${userId}/reputation-history/full',
+              '/users/${userId}/reputation-history',
               queryParameters: queryParameters,
               data: _data,
             )

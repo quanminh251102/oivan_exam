@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:oivan_exam/constant.dart';
@@ -6,8 +5,6 @@ import 'package:oivan_exam/core/services/interfaces/iauth_service.dart';
 import 'package:oivan_exam/core/utils/token_utils.dart';
 import 'package:oivan_exam/global/global_data.dart';
 import 'package:oivan_exam/global/locator.dart';
-import 'package:http/http.dart' as http;
-import '../../../ui/utils/loading_dialog_utils.dart';
 
 class AuthService implements IAuthService {
   @override

@@ -15,6 +15,7 @@ part 'widget/tag_list.dart';
 part 'widget/header.dart';
 part 'widget/summary_tab.dart';
 part 'widget/reputation_tab.dart';
+part 'widget/reputation_tile.dart';
 
 class UserDetailPage extends StatefulWidget {
   final UIUserDto userDto;
@@ -30,44 +31,49 @@ class UserDetailPage extends StatefulWidget {
 class _UserDetailPageState extends State<UserDetailPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const BackButton(),
-          //Header
-          _Header(
-            userDto: widget.userDto,
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: DefaultTabController(
-              length: 2,
-              child: Column(
-                children: [
-                  const TabBar(
-                    tabs: [
-                      Tab(text: 'Summary'),
-                      Tab(text: 'Reputation'),
-                    ],
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        _SummaryTab(
-                          userDto: widget.userDto,
-                        ),
-                        const _ReputationTab(),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const BackButton(),
+            //Header
+            _Header(
+              userDto: widget.userDto,
+            ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: DefaultTabController(
+                length: 2,
+                child: Column(
+                  children: [
+                    const TabBar(
+                      tabs: [
+                        Tab(text: 'Summary'),
+                        Tab(text: 'Reputation'),
                       ],
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: TabBarView(
+                        children: [
+                          _SummaryTab(
+                            userDto: widget.userDto,
+                          ),
+                          _ReputationTab(
+                            userDto: widget.userDto,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          // Progress Bar and Position
-          // ... rest of the content (Profile, Feed, Progress, etc.)
-        ],
+            // Progress Bar and Position
+            // ... rest of the content (Profile, Feed, Progress, etc.)
+          ],
+        ),
       ),
     );
   }

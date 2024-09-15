@@ -46,10 +46,10 @@ class _BadgeCard extends StatelessWidget {
   final int count;
 
   const _BadgeCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.count,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

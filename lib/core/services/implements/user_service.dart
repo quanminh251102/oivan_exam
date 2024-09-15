@@ -2,6 +2,7 @@ import 'package:oivan_exam/core/dto/user/reputation_history_dto.dart';
 import 'package:oivan_exam/core/dto/user/tag_dto.dart';
 import 'package:oivan_exam/core/dto/user/user_dto.dart';
 import 'package:oivan_exam/core/services/interfaces/iuser_service.dart';
+import 'package:oivan_exam/global/global_data.dart';
 import 'package:oivan_exam/global/locator.dart';
 import 'package:oivan_exam/ui/utils/loading_dialog_utils.dart';
 

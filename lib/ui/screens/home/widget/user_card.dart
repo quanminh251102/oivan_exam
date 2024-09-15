@@ -14,8 +14,9 @@ class _UserCard extends StatelessWidget {
               arguments: userDto,
             ),
         child: Card(
-          elevation: 3, // Subtle shadow
-          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          color: Colors.white,
+          elevation: 3,
+          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -26,52 +27,66 @@ class _UserCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    CachedNetworkImage(
-                      imageUrl: userDto.profileImage ??
-                          'https://via.placeholder.com/300x150',
-                      placeholder: (context, url) => const CircleAvatar(
-                        backgroundColor: Colors.amber,
-                        radius: 20,
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.blue,
+                          width: 2,
+                        ),
                       ),
-                      imageBuilder: (context, image) => CircleAvatar(
-                        backgroundImage: image,
-                        radius: 20,
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: CachedNetworkImage(
+                          imageUrl: userDto.profileImage ??
+                              'https://via.placeholder.com/300x150',
+                          placeholder: (context, url) => const CircleAvatar(
+                            backgroundColor: Colors.amber,
+                            radius: 30,
+                          ),
+                          imageBuilder: (context, image) => CircleAvatar(
+                            backgroundImage: image,
+                            radius: 30,
+                          ),
+                        ),
                       ),
                     ),
-                    SizedBox(width: 12),
+                    const SizedBox(width: 12),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           userDto.displayName ?? '',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 20),
                         ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.place_outlined,
-                              size: 15,
+                        if (userDto.creationDate != null)
+                          IconText(
+                            icon: Icons.cake_outlined,
+                            text: DateTimeUtils.memberDuration(
+                              userDto.creationDate!,
                             ),
-                            Text(
-                              userDto.location ?? '',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                          ],
-                        ),
+                          ),
+                        if (userDto.location != null)
+                          IconText(
+                            icon: Icons.place_outlined,
+                            text: userDto.location!,
+                          ),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Icon(Icons.star, color: Colors.yellow[700]),
-                    SizedBox(width: 4),
+                    const SizedBox(width: 4),
                     Text(userDto.reputation.toString()),
                   ],
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Row(
                   children: [
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                         color: userDto.isEmployee!
                             ? Colors.green[100]
@@ -87,16 +102,16 @@ class _UserCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
                           '\$${userDto.acceptRate}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        const Text(
                           'Accept Rate',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
@@ -104,19 +119,25 @@ class _UserCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     // Handle "More Details" button press here
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple, // Customize button color
-                    minimumSize: Size.fromHeight(40), // Set button height
+                    backgroundColor:
+                        const Color(0xff065FC4), // Customize button color
+                    minimumSize: const Size.fromHeight(40), // Set button height
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text('More Details'),
+                  child: const Text(
+                    'More Details',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             ),

@@ -2,13 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart';
 
 import 'package:get_it/get_it.dart';
 
 import 'package:oivan_exam/constant.dart';
-import 'package:oivan_exam/core/utils/token_utils.dart';
-import 'package:oivan_exam/global/router.dart';
 
 import '../core/api/rest_client.dart';
 

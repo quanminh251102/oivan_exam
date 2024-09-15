@@ -1,21 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:json_annotation/json_annotation.dart';
 
 part 'reputation_history_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class ReputationHistoryDto {
-  String? reputationHistoryType;
-  int? reputationChange;
-  int? postId;
-  int? creationDate;
-  int? userId;
-
-  ReputationHistoryDto(
-      {this.reputationHistoryType,
-      this.reputationChange,
-      this.postId,
-      this.creationDate,
-      this.userId});
+  String? reputation_history_type;
+  int? reputation_change;
+  int? post_id;
+  int? creation_date;
+  int? user_id;
+  ReputationHistoryDto({
+    this.reputation_history_type,
+    this.reputation_change,
+    this.post_id,
+    this.creation_date,
+    this.user_id,
+  });
 
   factory ReputationHistoryDto.fromJson(Map<String, dynamic> json) =>
       _$ReputationHistoryDtoFromJson(json);

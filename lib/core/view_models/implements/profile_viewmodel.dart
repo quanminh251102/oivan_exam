@@ -4,20 +4,19 @@ import 'package:oivan_exam/core/dto/user/tag_dto.dart';
 import 'package:oivan_exam/core/services/interfaces/iuser_service.dart';
 import 'package:oivan_exam/core/view_models/interfaces/iprofile_viewmodel.dart';
 import 'package:oivan_exam/global/locator.dart';
-import 'package:collection/collection.dart';
 
 class ProfileViewModel with ChangeNotifier implements IProfileViewModel {
   final IUserService _iUserService = locator<IUserService>();
 
   List<ReputationHistoryDto> _reputations = [];
 
-  List<ReputationGroupByPost> _reputationGroupByPost = [];
+  List<ReputationGroupByTime> _reputationGroupByTime = [];
   @override
-  List<ReputationGroupByPost> get reputationGroupByPost =>
-      _reputationGroupByPost;
+  List<ReputationGroupByTime> get reputationGroupByTime =>
+      _reputationGroupByTime;
 
-  int _totalReputations = 0;
-  int _totalReputationGroupByPost = 0;
+  final int _totalReputations = 0;
+  final int _totalReputationGroupByPost = 0;
   int page = 1;
 
   List<TagDto> _tags = [];
@@ -35,25 +34,37 @@ class ProfileViewModel with ChangeNotifier implements IProfileViewModel {
     final reputationList = await _iUserService.getUserReputation(
       userId: userId,
       page: 1,
-      pageSize: 30,
+      pageSize: 20,
       site: 'stackoverflow',
     );
     _reputations = reputationList ?? [];
-
-    Map<int, dynamic> reputations = _reputations.groupListsBy(
-      (element) {
-        _totalReputations += element.reputationChange!;
-        return element.postId!;
-      },
-    );
-
-    reputations.forEach((postId, reputations) {
-      _reputationGroupByPost.add(
-        ReputationGroupByPost(postId: postId, reputationList: reputations),
-      );
-    });
-
+    if (_reputations.isNotEmpty) {
+      _reputationGroupByTime = groupReputationByTime(reputationList!);
+    }
     notifyListeners();
+  }
+
+  List<ReputationGroupByTime> groupReputationByTime(
+      List<ReputationHistoryDto> reputationHistoryList) {
+    Map<DateTime, List<ReputationHistoryDto>> groupedByTime = {};
+
+    for (var reputation in reputationHistoryList) {
+      if (reputation.creation_date != null) {
+        DateTime time = DateTime.fromMillisecondsSinceEpoch(
+            reputation.creation_date! * 1000);
+
+        DateTime dateOnly = DateTime(time.year, time.month, time.day);
+
+        groupedByTime.putIfAbsent(dateOnly, () => []).add(reputation);
+      }
+    }
+
+    return groupedByTime.entries.map((entry) {
+      return ReputationGroupByTime(
+        time: entry.key,
+        reputationList: entry.value,
+      );
+    }).toList();
   }
 
   @override

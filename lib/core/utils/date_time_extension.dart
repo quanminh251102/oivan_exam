@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class DateTimeUtils {
   static DateTime fromUnixEpoch(int unixTimestamp) {
     return DateTime.fromMillisecondsSinceEpoch(unixTimestamp);
@@ -27,63 +29,84 @@ class DateTimeUtils {
   }
 
   static String timeAgo(int unixTimestamp) {
-    DateTime dateTime = fromUnixEpoch(unixTimestamp);
-    Duration diff = DateTime.now().difference(dateTime);
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
 
-    if (diff.inSeconds < 60) {
-      return '${diff.inSeconds} ${diff.inSeconds == 1 ? 'second' : 'seconds'} ago';
-    } else if (diff.inMinutes < 60) {
-      return '${diff.inMinutes} ${diff.inMinutes == 1 ? 'minute' : 'minutes'} ago';
-    } else if (diff.inHours < 24) {
-      return '${diff.inHours} ${diff.inHours == 1 ? 'hour' : 'hours'} ago';
-    } else if (diff.inDays < 7) {
-      return '${diff.inDays} ${diff.inDays == 1 ? 'day' : 'days'} ago';
-    } else if (diff.inDays < 30) {
-      int weeks = (diff.inDays / 7).floor();
-      return '$weeks ${weeks == 1 ? 'week' : 'weeks'} ago';
-    } else if (diff.inDays < 365) {
-      int months = (diff.inDays / 30).floor();
-      return '$months ${months == 1 ? 'month' : 'months'} ago';
+    DateTime now = DateTime.now();
+
+    Duration difference = now.difference(date);
+
+    if (difference.inSeconds < 60) {
+      return '${difference.inSeconds} seconds ago';
+    } else if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} minutes ago';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} hours ago';
+    } else if (difference.inDays < 7) {
+      return '${difference.inDays} days ago';
+    } else if (difference.inDays < 30) {
+      int weeks = (difference.inDays / 7).floor();
+      return '$weeks weeks ago';
+    } else if (difference.inDays < 365) {
+      int months = (difference.inDays / 30).floor();
+      return '$months months ago';
     } else {
-      int years = (diff.inDays / 365).floor();
-      return '$years ${years == 1 ? 'year' : 'years'} ago';
+      int years = (difference.inDays / 365).floor();
+      return '$years years ago';
     }
   }
 
   static String memberDuration(int unixTimestamp) {
-    DateTime startDate = fromUnixEpoch(unixTimestamp);
-    DateTime currentDate = DateTime.now();
+    // Convert the Unix timestamp (in seconds) to DateTime
+    DateTime joinDate =
+        DateTime.fromMillisecondsSinceEpoch(unixTimestamp * 1000);
 
-    int years = currentDate.year - startDate.year;
-    int months = currentDate.month - startDate.month;
-    int days = currentDate.day - startDate.day;
+    // Get the current time
+    DateTime now = DateTime.now();
 
-    if (months < 0) {
-      years -= 1;
-      months += 12;
+    // Calculate the difference in duration
+    Duration difference = now.difference(joinDate);
+
+    if (difference.inDays < 1) {
+      return 'Member for less than a day';
+    } else if (difference.inDays < 7) {
+      return 'Member for ${difference.inDays} days';
+    } else if (difference.inDays < 30) {
+      int weeks = (difference.inDays / 7).floor();
+      return 'Member for $weeks weeks';
+    } else if (difference.inDays < 365) {
+      int months = (difference.inDays / 30).floor();
+      return 'Member for $months months';
+    } else {
+      int years = (difference.inDays / 365).floor();
+      return 'Member for $years years';
+    }
+  }
+
+  static String formatDateWithSuffix(DateTime date) {
+    // Format the month and day
+    String formattedDate = DateFormat('MMMM d').format(date);
+
+    // Get the day to add the correct suffix
+    int day = date.day;
+    String suffix = getDaySuffix(day);
+
+    return '$formattedDate$suffix'; // Combine month, day, and suffix
+  }
+
+  static String getDaySuffix(int day) {
+    if (day >= 11 && day <= 13) {
+      return 'th'; // Special case for 11th, 12th, 13th
     }
 
-    if (days < 0) {
-      months -= 1;
-
-      days += DateTime(currentDate.year, currentDate.month, 0).day;
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
     }
-
-    if (months < 0) {
-      months += 12;
-      years -= 1;
-    }
-
-    String yearStr = years > 0 ? '$years ${years == 1 ? 'year' : 'years'}' : '';
-    String monthStr =
-        months > 0 ? '$months ${months == 1 ? 'month' : 'months'}' : '';
-    String dayStr = days > 0 ? '$days ${days == 1 ? 'day' : 'days'}' : '';
-
-    List<String> components = [yearStr, monthStr, dayStr]
-        .where((element) => element.isNotEmpty)
-        .toList();
-    return components.isNotEmpty
-        ? 'Member for ${components.join(', ')}'
-        : 'Member for less than a day';
   }
 }

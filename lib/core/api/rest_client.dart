@@ -18,11 +18,11 @@ abstract class RestClient {
     @Query('site') String? site,
   });
 
-  @GET('/users/{ids}/reputation-history/full')
+  @GET('/users/{ids}/reputation-history')
   Future<BaseApiDto<List<ReputationHistoryDto>>> getUserReputation({
     @Path("ids") int? userId,
     @Query('page') int? page,
-    @Query('access_token') int? accessToken,
+    @Query('access_token') String? accessToken,
     @Query('pageSize') int? pageSize,
     @Query('site') String? site,
   });

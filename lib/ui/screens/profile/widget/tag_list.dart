@@ -39,12 +39,12 @@ Widget _buildTagRow({
       Row(
         children: [
           _buildTagLabel(tag),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
         ],
       ),
       Text(
         '$score score',
-        style: TextStyle(fontSize: 16, color: Colors.black87),
+        style: const TextStyle(fontSize: 16, color: Colors.black87),
       ),
     ],
   );
@@ -52,14 +52,14 @@ Widget _buildTagRow({
 
 Widget _buildTagLabel(String tag) {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
     decoration: BoxDecoration(
       color: Colors.grey.shade200,
       borderRadius: BorderRadius.circular(5),
     ),
     child: Text(
       tag,
-      style: TextStyle(fontSize: 16, color: Colors.black87),
+      style: const TextStyle(fontSize: 16, color: Colors.black87),
     ),
   );
 }

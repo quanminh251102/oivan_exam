@@ -47,24 +47,24 @@ class _SignInScreenState extends State<SignInScreen> {
                     top: 20,
                     left: 20,
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.orange[100],
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Text("Let's learning!"),
+                      child: const Text("Let's learning!"),
                     ),
                   ),
                   Positioned(
                     top: 20,
                     right: 20,
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.green[100],
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Text("Let's go!"),
+                      child: const Text("Let's go!"),
                     ),
                   ),
                 ],
@@ -72,7 +72,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
 
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(
@@ -83,20 +83,20 @@ class _SignInScreenState extends State<SignInScreen> {
                       ))),
               child: Column(
                 children: [
-                  SizedBox(height: 30),
-                  Text(
+                  const SizedBox(height: 30),
+                  const Text(
                     'Start Learning Now 🚀',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     'Take your first step towards mastering a new language today!',
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: ElevatedButton(
@@ -106,14 +106,14 @@ class _SignInScreenState extends State<SignInScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white,
-                        minimumSize: Size(double.infinity, 50),
+                        minimumSize: const Size(double.infinity, 50),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Log In',
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: ElevatedButton(
@@ -121,13 +121,13 @@ class _SignInScreenState extends State<SignInScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: Colors.black,
-                        side: BorderSide(color: Colors.black),
-                        minimumSize: Size(double.infinity, 50),
+                        side: const BorderSide(color: Colors.black),
+                        minimumSize: const Size(double.infinity, 50),
                       ),
-                      child: Text('Continue as guest'),
+                      child: const Text('Continue as guest'),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

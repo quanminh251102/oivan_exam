@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oivan_exam/core/view_models/interfaces/ihome_viewmodel.dart';
 import 'package:oivan_exam/ui/screens/home/main_page.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,9 +22,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
+        title: const Text(
           'OivanStack',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -40,8 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
             _selectedIndex = index;
           });
         },
-        children: [
-          KeepAlivePage(child: const MainPage()),
+        children: const [
+          KeepAlivePage(child: MainPage()),
           KeepAlivePage(child: Center(child: Text('Search Page'))),
           KeepAlivePage(child: Center(child: Text('Profile Page'))),
         ],
@@ -70,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class KeepAlivePage extends StatefulWidget {
   final Widget child;
-  KeepAlivePage({required this.child});
+  const KeepAlivePage({super.key, required this.child});
 
   @override
   _KeepAlivePageState createState() => _KeepAlivePageState();

@@ -51,9 +51,9 @@ class _Header extends StatelessWidget {
               if (userDto.lastModifiedDate != null)
                 IconText(
                   icon: Icons.lock_clock_outlined,
-                  text: DateTimeUtils.timeAgo(
+                  text: 'Last seen from ${DateTimeUtils.timeAgo(
                     userDto.lastModifiedDate!,
-                  ),
+                  )}',
                 ),
               if (userDto.location != null)
                 IconText(
