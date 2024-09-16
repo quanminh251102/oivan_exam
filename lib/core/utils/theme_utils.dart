@@ -2,40 +2,42 @@ import 'package:flutter/material.dart';
 
 class ThemeUtils {
   static final darkTheme = ThemeData(
-    useMaterial3: false,
+    useMaterial3: true,
     dialogBackgroundColor: Colors.white,
     brightness: Brightness.light,
     appBarTheme: const AppBarTheme(
+        scrolledUnderElevation: 0,
         backgroundColor: Colors.white,
         actionsIconTheme: IconThemeData(color: Colors.black)),
     colorScheme: ColorScheme.fromSwatch().copyWith(
-      primary: Color(0xff4ED14B),
+      primary: const Color(0xff0ea473),
     ),
     tabBarTheme: const TabBarTheme(
-      labelColor: Color(0xff4ED14B),
+      labelColor: Color(0xff0ea473),
       indicator: UnderlineTabIndicator(
-          borderSide: BorderSide(color: Color(0xff4ED14B))),
+          borderSide: BorderSide(color: Color(0xff0ea473))),
     ),
-    primaryColor: Color(0xff4ED14B),
+    primaryColor: const Color(0xff0ea473),
     scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
     fontFamily: 'NOVAFont-Regular',
   );
   static final lightTheme = ThemeData(
-    useMaterial3: false,
+    useMaterial3: true,
     dialogBackgroundColor: Colors.white,
     brightness: Brightness.light,
     appBarTheme: const AppBarTheme(
+        scrolledUnderElevation: 0,
         backgroundColor: Colors.white,
         actionsIconTheme: IconThemeData(color: Colors.black)),
     colorScheme: ColorScheme.fromSwatch().copyWith(
-      primary: Color(0xff4ED14B),
+      primary: const Color(0xff0ea473),
     ),
     tabBarTheme: const TabBarTheme(
-      labelColor: Color(0xff4ED14B),
+      labelColor: const Color(0xff0ea473),
       indicator: UnderlineTabIndicator(
-          borderSide: BorderSide(color: Color(0xff4ED14B))),
+          borderSide: BorderSide(color: const Color(0xff0ea473))),
     ),
-    primaryColor: Color(0xff4ED14B),
+    primaryColor: const Color(0xff0ea473),
     scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
     fontFamily: 'NOVAFont-Regular',
   );

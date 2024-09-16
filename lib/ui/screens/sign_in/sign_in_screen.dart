@@ -81,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         await _iAuthViewModel.getAuthentication();
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
+                        backgroundColor: const Color(0xff0ea473),
                         foregroundColor: Colors.white,
                         minimumSize: const Size(double.infinity, 50),
                       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:oivan_exam/core/utils/theme_utils.dart';
 import 'package:oivan_exam/global/locator.dart';
 import 'package:oivan_exam/global/providers.dart';
 import 'package:provider/provider.dart';
@@ -52,28 +53,9 @@ class MyApp extends StatelessWidget {
           navigatorKey: NavigationUtils.navigatorKey,
           onGenerateRoute: (settings) => MyRouter.generateRoute(settings),
           initialRoute: MyRouter.splash,
-          theme: ThemeData(
-            checkboxTheme: CheckboxThemeData(
-              side: WidgetStateBorderSide.resolveWith(
-                (states) => const BorderSide(
-                  width: 1.0,
-                  color: Color(
-                    0xffD3D3D3,
-                  ),
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  2.0,
-                ),
-              ),
-              checkColor: WidgetStateProperty.all(
-                const Color(
-                  0xffFFFFFF,
-                ),
-              ),
-            ),
-          ),
+          darkTheme: ThemeUtils.darkTheme,
+          theme: ThemeUtils.lightTheme,
+          themeMode: ThemeMode.light,
           debugShowCheckedModeBanner: false,
         ));
   }

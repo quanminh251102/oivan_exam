@@ -28,7 +28,7 @@ class _Header extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.blue,
+                    color: const Color(0xff0ea473),
                     width: 2,
                   ),
                 ),
@@ -38,7 +38,7 @@ class _Header extends StatelessWidget {
                     imageUrl: userDto.profileImage ??
                         'https://via.placeholder.com/300x150',
                     placeholder: (context, url) => const CircleAvatar(
-                      backgroundColor: Colors.amber,
+                      backgroundColor: Colors.white,
                       radius: 40,
                     ),
                     imageBuilder: (context, image) => CircleAvatar(

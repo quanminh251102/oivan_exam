@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:oivan_exam/core/database/db_helper.dart';
 import 'package:oivan_exam/core/dto/user/user_dto.dart';
 import 'package:oivan_exam/core/view_models/interfaces/ihome_viewmodel.dart';
@@ -33,8 +35,7 @@ class _MainPageState extends State<MainPage> {
     Future.delayed(
       Duration.zero,
       () async {
-        LoadingDialogUtils.showLoading();
-        // await _iHomeViewModel.initGetUsers();
+        await _iHomeViewModel.initGetUsers();
       },
     );
     super.initState();
@@ -60,12 +61,22 @@ class _MainPageState extends State<MainPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Top users',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
+            Row(
+              children: [
+                Lottie.asset(
+                  'assets/lottie/recommend-flame.json',
+                  fit: BoxFit.fill,
+                  height: 40,
+                  width: 30,
+                ),
+                const Text(
+                  'Top users',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

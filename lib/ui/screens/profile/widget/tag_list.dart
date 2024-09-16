@@ -16,7 +16,9 @@ class _TagsList extends StatelessWidget {
         shrinkWrap: true,
         padding: const EdgeInsets.all(16),
         itemCount: tags.length,
-        separatorBuilder: (context, index) => const Divider(),
+        separatorBuilder: (context, index) => const Divider(
+          color: Colors.grey,
+        ),
         itemBuilder: (context, index) {
           int answerScore = tags[index].answer_score ?? 0;
           int questionScore = tags[index].question_score ?? 0;
@@ -56,7 +58,7 @@ Widget _buildTagLabel(String tag) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
     decoration: BoxDecoration(
-      color: Colors.green.shade200,
+      color: const Color(0xff0ea473),
       borderRadius: BorderRadius.circular(5),
     ),
     child: Text(

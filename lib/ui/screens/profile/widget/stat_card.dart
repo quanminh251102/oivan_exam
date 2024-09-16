@@ -18,7 +18,7 @@ class _StatsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color.fromARGB(255, 234, 246, 253),
+      color: Colors.white,
       elevation: 2,
       child: Container(
         decoration: BoxDecoration(
@@ -67,12 +67,9 @@ class _StatsCard extends StatelessWidget {
           Text(
             value,
             style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Color(
-                0xff0478BA,
-              ),
-            ),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff0ea473)),
           ),
           const SizedBox(height: 4),
           Text(

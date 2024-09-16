@@ -9,6 +9,7 @@ import 'package:oivan_exam/core/dto/user/user_dto.dart';
 import 'package:oivan_exam/core/utils/date_time_extension.dart';
 import 'package:oivan_exam/core/view_models/interfaces/iprofile_viewmodel.dart';
 import 'package:oivan_exam/ui/common_widgets/icon_text.dart';
+import 'package:oivan_exam/ui/common_widgets/section_title.dart';
 import 'package:provider/provider.dart';
 
 part 'widget/badge_card.dart';
@@ -39,11 +40,14 @@ class _UserDetailPageState extends State<UserDetailPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,
-          title: Text(
-            'User detail',
+          title: const Text(
+            'Profile',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        backgroundColor: Color(0xffEDF1F8),
+        backgroundColor: const Color.fromARGB(255, 225, 247, 240),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -75,8 +79,9 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color:
-                                isBarChartSelected ? Colors.blue : Colors.white,
+                            color: isBarChartSelected
+                                ? const Color(0xff0ea473)
+                                : Colors.white,
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
@@ -116,7 +121,7 @@ class _UserDetailPageState extends State<UserDetailPage> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: !isBarChartSelected
-                                ? Colors.blue
+                                ? const Color(0xff0ea473)
                                 : Colors.white,
                             borderRadius: BorderRadius.circular(30),
                           ),

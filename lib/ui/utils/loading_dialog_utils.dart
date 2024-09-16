@@ -6,7 +6,6 @@ import 'package:simple_fontellico_progress_dialog/simple_fontico_loading.dart';
 class LoadingDialogUtils {
   static SimpleFontelicoProgressDialog? _progressDialog;
 
-  /// show loading and return the dialog
   static void showLoading({
     String message = "Loading...",
   }) {
@@ -16,8 +15,8 @@ class LoadingDialogUtils {
     _progressDialog!.show(
         message: message.tr,
         horizontal: false,
-        width: 100,
-        height: 120,
+        width: 200,
+        height: 200,
         separation: 30,
         textStyle: const TextStyle(
           fontWeight: FontWeight.w600,
@@ -27,7 +26,7 @@ class LoadingDialogUtils {
         backgroundColor: Colors.transparent,
         type: SimpleFontelicoProgressDialogType.custom,
         loadingIndicator: Lottie.asset(
-          'assets/lottie/loading-text.json',
+          'assets/lottie/loading_text.json',
         ));
   }
 

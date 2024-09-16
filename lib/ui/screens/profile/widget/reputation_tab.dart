@@ -61,104 +61,121 @@ class __ReputationTabState extends State<_ReputationTab> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(
-              top: 8,
-              left: 16,
-              right: 16,
-            ),
-            child: Text('Reputation Chart',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
-          Consumer<IProfileViewModel>(
-            builder: (context, vm, child) {
-              return _ReputationChart(
-                totalReputation: widget.userDto.reputation ?? 0,
-                reputationHistoryList: vm.reputations,
-              );
-            },
-          ),
-          //Reputation History
-          const Padding(
-            padding: EdgeInsets.only(
-              top: 8,
-              left: 16,
-              right: 16,
-            ),
-            child: Text('Reputation History',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(
+              10,
+            )),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(
+                  top: 8,
+                  left: 16,
+                  right: 16,
+                ),
+                child: Text('Reputation Chart',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              Consumer<IProfileViewModel>(
+                builder: (context, vm, child) {
+                  return _ReputationChart(
+                    totalReputation: widget.userDto.reputation ?? 0,
+                    reputationHistoryList: vm.reputations,
+                  );
+                },
+              ),
+              //Reputation History
+              const Padding(
+                padding: EdgeInsets.only(
+                  top: 8,
+                  left: 16,
+                  right: 16,
+                ),
+                child: Text('Reputation History',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
 
-          Consumer<IProfileViewModel>(
-            builder: (context, vm, child) {
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: vm.reputationGroupByTime.length,
-                        itemBuilder: (context, index) {
-                          var group = vm.reputationGroupByTime[index];
-                          int totalReputation =
-                              calculateTotalReputation(group.reputationList);
-                          String totalReputationDisplay = totalReputation >= 0
-                              ? '+$totalReputation'
-                              : '$totalReputation';
-                          return _ReputationTile(
-                            group: group,
-                            totalReputation: totalReputation,
-                            totalReputationDisplay: totalReputationDisplay,
-                          );
-                        },
-                      ),
-                      if (vm.reputationGroupByTime.isNotEmpty)
-                        SizedBox(
-                          width: size.width * 0.4,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              await _iProfileViewModel.getMoreReputation(
-                                widget.userDto.userId!,
+              Consumer<IProfileViewModel>(
+                builder: (context, vm, child) {
+                  return SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: vm.reputationGroupByTime.length,
+                            itemBuilder: (context, index) {
+                              var group = vm.reputationGroupByTime[index];
+                              int totalReputation = calculateTotalReputation(
+                                  group.reputationList);
+                              String totalReputationDisplay =
+                                  totalReputation >= 0
+                                      ? '+$totalReputation'
+                                      : '$totalReputation';
+                              return _ReputationTile(
+                                group: group,
+                                totalReputation: totalReputation,
+                                totalReputationDisplay: totalReputationDisplay,
                               );
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              minimumSize: const Size.fromHeight(40),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                  side: const BorderSide(
-                                      color: Color(0xff065FC4))),
-                            ),
-                            child: const Text(
-                              'See more',
-                              style: TextStyle(
-                                color: Color(0xff065FC4),
+                          ),
+                          if (vm.reputationGroupByTime.isNotEmpty)
+                            SizedBox(
+                              width: size.width * 0.4,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  await _iProfileViewModel.getMoreReputation(
+                                    widget.userDto.userId!,
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  minimumSize: const Size.fromHeight(40),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: const BorderSide(
+                                      color: Color(
+                                        0xff0ea473,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                child: const Text(
+                                  'See more',
+                                  style: TextStyle(
+                                    color: Color(
+                                      0xff0ea473,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      SizedBox(
-                        height: size.height * 0.05,
-                      )
-                    ],
-                  ),
-                ),
-              );
-            },
+                          SizedBox(
+                            height: size.height * 0.05,
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

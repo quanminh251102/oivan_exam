@@ -41,17 +41,14 @@ class _SummaryTabState extends State<_SummaryTab> {
                     10,
                   )),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 8),
-                    //Badges
-                    const Text('Badges',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        )),
+                    // Badges Section
+                    const SectionTitle(
+                        title: 'Badges', icon: Icons.military_tech),
                     const SizedBox(height: 5),
                     if (widget.userDto.badgeCounts != null)
                       _BadgesWidget(
@@ -59,12 +56,10 @@ class _SummaryTabState extends State<_SummaryTab> {
                       ),
                     const SizedBox(height: 8),
 
-                    //Stats
-                    const Text('Stats',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        )),
+                    // Stats Section
+                    const SectionTitle(
+                        title: 'Reputation changes',
+                        icon: Icons.bar_chart), // Icon for Stats
                     const SizedBox(height: 5),
                     _StatsCard(
                       year: '${widget.userDto.reputationChangeYear}',
@@ -74,13 +69,10 @@ class _SummaryTabState extends State<_SummaryTab> {
                       total: '${widget.userDto.reputation}',
                     ),
 
-                    //Tags
+                    // Tags Section
                     const SizedBox(height: 8),
-                    const Text('Top tags',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        )),
+                    const SectionTitle(
+                        title: 'Top tags', icon: Icons.tag), // Icon for Tags
                     const SizedBox(height: 5),
                     Consumer<IProfileViewModel>(
                       builder: (context, vm, child) {

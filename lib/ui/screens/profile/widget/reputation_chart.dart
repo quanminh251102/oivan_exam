@@ -36,7 +36,7 @@ class _ReputationChartState extends State<_ReputationChart> {
                   decoration: const BoxDecoration(
                     border: Border(
                       left: BorderSide(
-                        color: Colors.blue,
+                        color: Color(0xff0ea473),
                         width: 5,
                       ),
                     ),
@@ -61,7 +61,7 @@ class _ReputationChartState extends State<_ReputationChart> {
                   decoration: const BoxDecoration(
                     border: Border(
                       left: BorderSide(
-                        color: Colors.blue,
+                        color: Color(0xff0ea473),
                         width: 5,
                       ),
                     ),
@@ -128,7 +128,7 @@ class _ReputationChartState extends State<_ReputationChart> {
           LineChartBarData(
             spots: _createLineSpots(),
             isCurved: true,
-            color: Colors.blue,
+            color: const Color(0xff0ea473),
             barWidth: 3,
             dotData: const FlDotData(show: true),
           ),

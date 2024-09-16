@@ -20,6 +20,7 @@ class IconText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -29,9 +30,14 @@ class IconText extends StatelessWidget {
           color: Colors.grey,
         ),
         SizedBox(width: spacing),
-        Text(
-          text,
-          style: const TextStyle(color: Colors.grey),
+        SizedBox(
+          width: size.width * 0.45,
+          child: Text(
+            text,
+            style: const TextStyle(color: Colors.grey),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          ),
         ),
       ],
     );

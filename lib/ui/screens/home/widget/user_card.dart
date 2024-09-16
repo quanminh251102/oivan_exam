@@ -67,7 +67,7 @@ class __UserCardState extends State<_UserCard> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: Colors.blue,
+                            color: const Color(0xff0ea473),
                             width: 2,
                           ),
                         ),
@@ -164,7 +164,9 @@ class __UserCardState extends State<_UserCard> {
                       ],
                     ),
                   ),
-                  const Divider(),
+                  const Divider(
+                    color: Colors.grey,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -189,6 +191,7 @@ class __UserCardState extends State<_UserCard> {
                           children: [
                             Text(
                               'More details',
+                              style: TextStyle(color: Color(0xff0ea473)),
                             ),
                             SizedBox(
                               width: 5,
