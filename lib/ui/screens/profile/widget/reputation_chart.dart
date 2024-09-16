@@ -23,6 +23,9 @@ class _ReputationChartState extends State<_ReputationChart> {
 
   @override
   Widget build(BuildContext context) {
+    for (var element in widget.reputationHistoryList) {
+      latestReputation += element.reputation_change!;
+    }
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: SizedBox(
@@ -93,11 +96,6 @@ class _ReputationChartState extends State<_ReputationChart> {
   }
 
   Widget _buildLineChart() {
-    for (var element in widget.reputationHistoryList) {
-      setState(() {
-        latestReputation += element.reputation_change!;
-      });
-    }
     return LineChart(
       LineChartData(
         titlesData: FlTitlesData(
