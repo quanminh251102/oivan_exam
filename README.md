@@ -12,9 +12,9 @@ The app is built for real-world use cases where features like token persistence,
 <h3>Here are some screenshots of the Oivan Stack in action:</h3>
 
 <p align="center">
-  <img src="screenshot1.png" alt="Screenshot 1" width="300"/>
-  <img src="screenshot2.png" alt="Screenshot 2" width="300"/>
-  <img src="screenshot3.png" alt="Screenshot 3" width="300"/>
+  <img src="screenshot1.png" alt="Screenshot 1" width="200"/>
+  <img src="screenshot2.png" alt="Screenshot 2" width="200"/>
+  <img src="screenshot3.png" alt="Screenshot 3" width="200"/>
 </p>
 
 # 🧰 Tech Stack
