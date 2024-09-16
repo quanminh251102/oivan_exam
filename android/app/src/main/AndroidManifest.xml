@@ -25,7 +25,7 @@
         </intent>
     </queries>
     <!--#enddocregion android-queries-->
-    <application android:label="oivan_exam" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
+    <application android:label="Oivan Stack" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
         <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
             <intent-filter android:label="flutter_web_auth">
                 <action android:name="android.intent.action.VIEW" />

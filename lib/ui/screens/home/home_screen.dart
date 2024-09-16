@@ -14,7 +14,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 10,
+        ),
         child: MainPage(),
       ),
     );
@@ -22,26 +25,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar _buildAppBar() {
     return AppBar(
+      centerTitle: true,
       automaticallyImplyLeading: false,
       backgroundColor: Colors.white,
       elevation: 0,
-      title: const Row(
-        children: [
-          CircleAvatar(
-            backgroundImage: NetworkImage('https://via.placeholder.com/50'),
-            radius: 20,
-          ),
-          SizedBox(width: 10),
-          Text(
-            'Oivan Stack',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
-              color: Colors.black,
-            ),
-          ),
-          Spacer(),
-        ],
+      leading: Padding(
+        padding: const EdgeInsets.only(
+          left: 10,
+        ),
+        child: Image.asset('assets/images/playstore-icon.png'),
+      ),
+      title: const Text(
+        'Oivan Stack',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 22,
+          color: Colors.black,
+        ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oivan_exam/core/view_models/interfaces/isplash_viewmodel.dart';
 import 'package:provider/provider.dart';
+import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,27 +23,41 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // Image.asset(
-            //   'assets/oivanstack_logo.png',
-            //   // Replace with your logo image path
-            //   height: 200, // Adjust logo size as needed
-            // ),
-            SizedBox(height: 20),
-            Text(
-              'OivanStack',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue, // Customize text color
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 222, 240, 253),
+              Color.fromARGB(255, 241, 248, 253)
+            ],
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                width: 200,
+                height: 200,
+                child: Lottie.asset(
+                  'assets/lottie/splash.json',
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              const Text(
+                'Oivan Stack',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

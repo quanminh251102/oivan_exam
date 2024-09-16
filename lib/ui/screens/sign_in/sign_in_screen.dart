@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:oivan_exam/core/view_models/interfaces/iauth_viewmodel.dart';
+import 'package:oivan_exam/global/router.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -24,68 +26,43 @@ class _SignInScreenState extends State<SignInScreen> {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Colors.blue[100]!, Colors.blue[50]!], // Light blue gradient
+          colors: [Colors.blue[100]!, Colors.blue[50]!],
         ),
       ),
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Top Section (Image and Speech Bubbles)
             Expanded(
               child: Stack(
                 children: [
-                  // Image (replace with your image asset)
                   Center(
-                    child: Image.asset(
-                      'assets/welcome_image.png', // Replace with your image path
-                      height: 300,
+                      child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: SizedBox.fromSize(
+                      size: const Size.fromRadius(100),
+                      child: Image.asset('assets/images/playstore-icon.png',
+                          fit: BoxFit.cover),
                     ),
-                  ),
-                  // Speech Bubbles
-                  Positioned(
-                    top: 20,
-                    left: 20,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.orange[100],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Text("Let's learning!"),
-                    ),
-                  ),
-                  Positioned(
-                    top: 20,
-                    right: 20,
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.green[100],
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Text("Let's go!"),
-                    ),
-                  ),
+                  )),
                 ],
               ),
             ),
-
             Container(
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(
-                        20,
+                        30,
                       ),
                       topRight: Radius.circular(
-                        20,
+                        30,
                       ))),
               child: Column(
                 children: [
                   const SizedBox(height: 30),
                   const Text(
-                    'Start Learning Now 🚀',
+                    'Get Started Now 🚀',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -93,7 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    'Take your first step towards mastering a new language today!',
+                    'Log in through Stack Overflow will get you higher quota !',
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20),
@@ -117,7 +94,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Get.toNamed(
+                        MyRouter.home,
+                      ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
                         foregroundColor: Colors.black,

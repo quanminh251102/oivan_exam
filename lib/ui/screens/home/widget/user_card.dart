@@ -77,7 +77,7 @@ class __UserCardState extends State<_UserCard> {
                             imageUrl: widget.userDto.profileImage ??
                                 'https://via.placeholder.com/300x150',
                             placeholder: (context, url) => const CircleAvatar(
-                              backgroundColor: Colors.amber,
+                              backgroundColor: Colors.white,
                               radius: 30,
                             ),
                             imageBuilder: (context, image) => CircleAvatar(

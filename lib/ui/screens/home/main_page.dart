@@ -7,6 +7,7 @@ import 'package:oivan_exam/core/dto/user/user_dto.dart';
 import 'package:oivan_exam/core/view_models/interfaces/ihome_viewmodel.dart';
 import 'package:oivan_exam/global/router.dart';
 import 'package:oivan_exam/ui/common_widgets/icon_text.dart';
+import 'package:oivan_exam/ui/utils/loading_dialog_utils.dart';
 import 'package:provider/provider.dart';
 
 part './widget/user_card.dart';
@@ -32,7 +33,8 @@ class _MainPageState extends State<MainPage> {
     Future.delayed(
       Duration.zero,
       () async {
-        await _iHomeViewModel.initGetUsers();
+        LoadingDialogUtils.showLoading();
+        // await _iHomeViewModel.initGetUsers();
       },
     );
     super.initState();

@@ -1,4 +1,4 @@
-import 'package:oivan_exam/constant.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:oivan_exam/core/dto/user/reputation_history_dto.dart';
 import 'package:oivan_exam/core/dto/user/tag_dto.dart';
 import 'package:oivan_exam/core/dto/user/user_dto.dart';
@@ -22,6 +22,8 @@ class UserService implements IUserService {
   int _totalTopTags = 0;
   @override
   int get totalTopTags => _totalTopTags;
+
+  String key = dotenv.env['KEY']!;
 
   @override
   Future<List<UserDto>?> getUsers(

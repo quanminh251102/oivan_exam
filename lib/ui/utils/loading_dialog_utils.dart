@@ -19,7 +19,7 @@ class LoadingDialogUtils {
         width: 100,
         height: 120,
         separation: 30,
-        textStyle:const TextStyle(
+        textStyle: const TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 12,
         ),
@@ -27,7 +27,7 @@ class LoadingDialogUtils {
         backgroundColor: Colors.transparent,
         type: SimpleFontelicoProgressDialogType.custom,
         loadingIndicator: Lottie.asset(
-          'assets/lottie/loading.json',
+          'assets/lottie/loading-text.json',
         ));
   }
 

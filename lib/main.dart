@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:oivan_exam/global/locator.dart';
 import 'package:oivan_exam/global/providers.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'global/router.dart';
 import 'ui/utils/navigation_utils.dart';
 
@@ -16,6 +16,7 @@ Future<void> main() async {
   ]);
   configLoading();
   await setupLocator();
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
         providers: [...viewModelProviders],
         child: GetMaterialApp(
           builder: EasyLoading.init(),
-          title: 'OivanStack',
+          title: 'Oivan Stack',
           navigatorKey: NavigationUtils.navigatorKey,
           onGenerateRoute: (settings) => MyRouter.generateRoute(settings),
           initialRoute: MyRouter.splash,
